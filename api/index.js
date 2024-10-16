@@ -6,8 +6,8 @@ const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const projectRoute = require("./routes/projects");
 const homeProjectRoute = require("./routes/homeProjects");
-const homeHeaderRoute = require("./routes/HomeHeader");
-const footerRoute = require("./routes/Footer");
+const homeHeaderRoute = require("./routes/homeHeader");
+const footerRoute = require("./routes/footer");
 const contactRoute = require("./routes/contact");
 
 
