@@ -1,0 +1,95 @@
+/* Container for the whole form */
+.contactform-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.contact-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contact-form-input {
+    margin-bottom: 20px;
+}
+
+.contact-form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.contact-form-vrai {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #555;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form-vrai:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* For text areas */
+.contact-form-vrai.help {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Required field indicator */
+.required {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Submit button styling */
+.contact-form-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.contact-form-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+    .contact-form-wrapper {
+        flex-direction: column;
+    }
+}

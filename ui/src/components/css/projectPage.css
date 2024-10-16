@@ -1,0 +1,190 @@
+.project-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 45px;
+    padding-top: 10px;
+}
+
+.project-title {
+    font-size: 50px;
+    margin: 0;
+    color: #1B263B;
+    font-weight: 400;
+    letter-spacing: 7px;
+}
+
+.project-close {
+    font-size: 60px !important;
+    cursor: pointer;
+    color: #1B263B;
+}
+
+.project-desc {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    padding: 60px 40px;
+}
+
+.project-image {
+    width: auto;
+    height: 250px;
+}
+
+.pp,
+.pi {
+    flex: 1;
+}
+
+.pi {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.project-thumbnail {
+    width: auto;
+    height: 50px;
+    cursor: pointer;
+}
+
+.thumbnail-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.selected {
+    opacity: 1;
+    scale: 1.2;
+    transition: opacity .7s ease, scale .7s ease;
+}
+
+.unselected {
+    opacity: 0.7;
+    scale: 1;
+}
+
+.project-info {
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-align: justify;
+    padding-right: 20px;
+}
+
+.project-lang {
+    background-color: #415A77;
+    padding: 50px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+}
+
+.lang {
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 7px;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.project-more-p {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-align: justify;
+    padding: 40px;
+    padding-top: 0;
+}
+
+.project-button {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 50px;
+    border: none;
+    background-color: #415A77;
+    color: white;
+    cursor: pointer;
+    transition: background-color .7s ease, color .7s ease, border .7s ease;
+}
+
+.project-more-desc {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-button:hover {
+    background-color: transparent;
+    color: #415A77;
+    border: 1px solid #415A77;
+}
+
+.project-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+@media only screen and (max-width:940px) {
+    .project-desc {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .project-lang {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media only screen and (max-width:540px) {
+    .project-image {
+        height: 200px;
+    }
+    .project-thumbnail {
+        height: 30px;
+    }
+    .thumbnail-container {
+        gap: 30px;
+    }
+    .project-title {
+        font-size: 35px;
+    }
+    .project-close{
+        font-size: 40px !important;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .project-title {
+        font-size: 24px;
+    }
+    .project-image {
+        height: 150px;
+    }
+    .thumbnail-container {
+        gap: 10px;
+    }
+}
