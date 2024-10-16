@@ -14,7 +14,9 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express(); 
-app.use(cors());
+app.use(cors({
+    origin: 'https://my-portfolio-hr8c.onrender.com',
+}));
 app.use(express.json());
  
 // Database connection
