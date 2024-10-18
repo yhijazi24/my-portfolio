@@ -94,7 +94,7 @@ const Body = () => {
           <div className='swiper-wrapper' style={{ transform: `translateX(-${activeSection * 100}%)` }}>
             <div className='swiper-slide'>
               <div className='content'>
-                <h1 className='content-title' ref={tabletRef}>Yahya Hijaz Yahya Hijazi Yahy Hiajzi{home.title}</h1>
+                <h1 className='content-title' ref={tabletRef}>{home.title}</h1>
               </div>
             </div>
             <div className='swiper-slide'>
