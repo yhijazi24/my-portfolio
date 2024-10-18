@@ -15,8 +15,9 @@ dotenv.config();
 
 const app = express(); 
 app.use(cors({
-    origin: 'https://my-portfolio-hr8c.onrender.com',
+    origin: ['https://my-portfolio-hr8c.onrender.com', 'https://my-portfolio-admin-wq3f.onrender.com'],
 }));
+
 app.use(express.json());
  
 // Database connection
