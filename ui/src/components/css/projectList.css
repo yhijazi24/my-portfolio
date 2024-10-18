@@ -142,8 +142,8 @@
 }
 
 .project-list-image {
-    max-width: 250px;
-    height: auto;
+    max-height: 120px;
+    width: auto;
     box-shadow: 3px 4px 14px 0px #6d88a7;
     border-radius: 5px;
 }
