@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd ui # Navigate to the frontend directory
+        - npm install # Install dependencies
+    build:
+      commands:
+        - npx vite build # Build the project with Vite
+  artifacts:
+    baseDirectory: ui/dist # Output directory for the build artifacts
+    files:
+      - '**/*' # All files in the build output
+  cache:
+    paths:
+      - node_modules/**/* # Cache node_modules for faster builds
