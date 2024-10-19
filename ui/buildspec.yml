@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Build started on `date`
       - cd ui # Ensure you're in the ui directory
-      - npm run build # This command assumes your script builds to dist
+      - npx vite build  # This command assumes your script builds to dist
   post_build:
     commands:
       - echo Build completed on `date`
