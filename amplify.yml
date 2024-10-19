@@ -3,15 +3,18 @@ frontend:
   phases:
     preBuild:
       commands:
+        - echo "Pre-build phase started..."
         - cd ui # Navigate to the frontend directory
         - npm install # Install dependencies
+        - chmod -R 755 node_modules/.bin # Ensure proper permissions for binaries
     build:
       commands:
+        - echo "Build phase started..."
         - npx vite build # Build the project with Vite
   artifacts:
     baseDirectory: ui/dist # Output directory for the build artifacts
     files:
-      - '**/*' # All files in the build output
+      - '**/*' # All files in the dist folder
   cache:
     paths:
       - node_modules/**/* # Cache node_modules for faster builds
