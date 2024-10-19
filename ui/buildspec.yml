@@ -3,25 +3,24 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 14 # Change to your desired Node.js version
     commands:
       - echo Installing source NPM dependencies...
-      - cd ui
-      - npm install
+      - cd ui # Navigate to the ui folder
+      - npm install # Install dependencies
   pre_build:
     commands:
       - echo Pre-build stage...
-      - npm run build 
   build:
     commands:
       - echo Build started on `date`
-      - npm run build 
+      - cd ui # Ensure you're in the ui directory
+      - npm run build # This command assumes your script builds to dist
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Your build output is located in the `build` folder.
 
 artifacts:
   files:
-    - ui/build/**/*
-  base-directory: ui/build
+    - ui/dist/**/* # Include all files in the dist directory
+  base-directory: ui/dist # Set the base directory for the artifacts
