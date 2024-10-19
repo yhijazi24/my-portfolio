@@ -21,7 +21,7 @@ const ContactForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://portfolio-w14d.onrender.com/contact', formData, {
+            const response = await axios.post('https://13.36.69.227.nip.io/contact', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

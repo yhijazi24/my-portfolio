@@ -14,7 +14,7 @@ const Footer = () => {
   useEffect(() => {
     const getFooter = async () => {
       try {
-        const res = await axios.get(`https://portfolio-w14d.onrender.com/footer/`);
+        const res = await axios.get(`https://13.36.69.227.nip.io/footer/`);
         console.log('Fetched Footer Data:', res.data);
         setFooter(res.data[0]);
       } catch (err) {

@@ -12,7 +12,7 @@ const ProjectPage = () => {
   useEffect(() => {
     const getProject = async () => {
       try {
-        const res = await axios.get(`https://portfolio-w14d.onrender.com/projects/find/${title}`);
+        const res = await axios.get(`https://13.36.69.227.nip.io/projects/find/${title}`);
         setProject(res.data);
         if (res.data.img && res.data.img.length > 0) {
           setMainImage(res.data.img[0]); 

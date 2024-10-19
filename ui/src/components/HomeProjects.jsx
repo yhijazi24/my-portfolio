@@ -10,7 +10,7 @@ const HomeProjects = () => {
   useEffect(() => {
     const fetchProjectsData = async () => {
       try {
-        const response = await axios.get("https://portfolio-w14d.onrender.com/homeProject/");
+        const response = await axios.get("https://13.36.69.227.nip.io/homeProject/");
         console.log("Fetched Data:", response.data);
         setProjectsData(response.data[0]); 
       } catch (error) {

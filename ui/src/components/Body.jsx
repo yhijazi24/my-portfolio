@@ -16,7 +16,7 @@ const Body = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const res = await axios.get("https://portfolio-w14d.onrender.com/homeHeader/");
+        const res = await axios.get("https://13.36.69.227.nip.io/homeHeader/");
         console.log(res)
         setHome(res.data[0]);
       } catch (err) {
