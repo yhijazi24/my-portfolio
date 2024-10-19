@@ -15,10 +15,10 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "*", // Allow all origins for testing
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // Allow credentials if needed
+    origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
+    credentials: true,
 }));
+
 
 
 app.use(express.json());
