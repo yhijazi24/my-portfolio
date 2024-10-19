@@ -15,9 +15,11 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
-    credentials: true
+    origin: "*", // Allow all origins for testing
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allow credentials if needed
 }));
+
 
 app.use(express.json());
 
