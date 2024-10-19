@@ -10,17 +10,19 @@ const homeHeaderRoute = require("./routes/homeHeader");
 const footerRoute = require("./routes/footer");
 const contactRoute = require("./routes/contact");
 
-
 dotenv.config();
 
 const app = express();
-app.use(cors({
+
+// CORS Middleware
+const corsOptions = {
     origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
-    credentials: true,
-}));
+    credentials: true, // Allow credentials
+    optionsSuccessStatus: 200 // For legacy browser support
+};
 
-
-
+// Apply CORS middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database connection
