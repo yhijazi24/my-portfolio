@@ -15,27 +15,13 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-    origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com', // Your frontend domain
+    origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',  // Set your frontend domain here
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // To allow cookies or authorization headers
-    optionsSuccessStatus: 200, // Legacy browser support
+    credentials: true,  // If you need to allow credentials (cookies, authorization headers)
+    optionsSuccessStatus: 200  // Some legacy browsers choke on 204
 };
 
-// Middleware to handle CORS
 app.use(cors(corsOptions));
-
-// Middleware to ensure correct CORS headers are added
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://main.dskc3hnhs7ow3.amplifyapp.com');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-});
-
-// Handling Preflight Requests (OPTIONS)
-app.options('*', cors(corsOptions));
-
-
 app.use(express.json());
 
 // Database connection
