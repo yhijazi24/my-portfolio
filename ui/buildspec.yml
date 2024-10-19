@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing source NPM dependencies...
+      - cd ui
+      - npm install
+  pre_build:
+    commands:
+      - echo Pre-build stage...
+      - npm run build 
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build 
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Your build output is located in the `build` folder.
+
+artifacts:
+  files:
+    - ui/build/**/*
+  base-directory: ui/build
