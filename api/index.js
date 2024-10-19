@@ -15,6 +15,7 @@ dotenv.config();
 
 const app = express(); 
 app.use(cors({
+    origin:'https://main.dskc3hnhs7ow3.amplifyapp.com',
 }));
 
 app.use(express.json());
