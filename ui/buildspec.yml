@@ -6,18 +6,15 @@ phases:
       nodejs: 14 # Change to your desired Node.js version
     commands:
       - echo Installing source NPM dependencies...
-      - cd ui # Navigate to the 'ui' folder where your frontend code is
-      - npm install # Install dependencies
+      - npm install # Install dependencies in the current directory (which is 'ui')
 
   pre_build:
     commands:
       - echo Pre-build stage...
-      - cd ui # Ensure you're in the 'ui' directory
 
   build:
     commands:
       - echo Build started on `date`
-      - cd ui # Ensure you're in the 'ui' directory
       - npx vite build # Build the frontend with Vite
 
   post_build:
@@ -26,8 +23,8 @@ phases:
 
 artifacts:
   files:
-    - ui/dist/**/* # Include all files in the 'dist' folder
-  base-directory: ui/dist # Set the base directory for the build artifacts
+    - dist/**/* # Include all files in the 'dist' folder
+  base-directory: dist # Set the base directory for the build artifacts
 
 cache:
   paths:
