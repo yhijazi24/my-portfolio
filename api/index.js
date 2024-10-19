@@ -14,7 +14,9 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
-app.use(cors())
+app.use(cors({
+    origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
+}))
 app.use(express.json());
 
 // Database connection
