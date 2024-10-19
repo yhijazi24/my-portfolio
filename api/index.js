@@ -14,14 +14,8 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
-const corsOptions = {
-    origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // if you need to send cookies or authentication headers
-    optionsSuccessStatus: 200, // for legacy browser support
-};
+app.use(cors());
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database connection
