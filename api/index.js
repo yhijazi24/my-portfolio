@@ -13,17 +13,26 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
+
+// CORS configuration
 app.use(cors({
     origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
-    credentials: true,  // if you're sending cookies/auth tokens, set this to true
+    credentials: true,  // If you're dealing with cookies or credentials
     optionsSuccessStatus: 200
 }));
 
-app.use(express.json());
+// Log headers to check for duplicates
 app.use((req, res, next) => {
-    console.log(res.getHeaders());
+    res.setHeader('Access-Control-Allow-Origin', 'https://main.dskc3hnhs7ow3.amplifyapp.com');
+    console.log('CORS Headers:', res.getHeaders()); // Logs headers to verify
     next();
 });
+
+// Handle preflight requests for all routes (OPTIONS method)
+app.options('*', cors());
+
+// Middleware to handle JSON requests
+app.use(express.json());
 
 // Database connection
 mongoose.connect(process.env.MONGO_URL)
