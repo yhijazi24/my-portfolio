@@ -12,8 +12,7 @@ import HomeHeader from './admin/pages/HomeHeader';
 import HomeProjects from './admin/pages/HomeProjects'; 
 import Footer from './admin/pages/Footer';
 import ContactAdmin from './admin/pages/Contact';
-import Topbar from './admin/conponents/Topbar';
-import Sidebar from './admin/conponents/Sidebar';
+import Admin from './admin/Admin'
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -36,15 +35,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      {admin && (
-        <>
-          <Topbar />
-          <div className="container">
-            <Sidebar />
-          </div>
-        </>
-      )}
-
       <Routes>
         {/* UI Routes */}
         <Route exact path="/" element={<Home />} />
@@ -56,6 +46,7 @@ function App() {
         <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
         {admin && (
           <>
+          <Admin />
             <Route exact path="/admin" element={<ProjectList />} />
             <Route exact path="/admin/project/:id" element={<Project />} />
             <Route exact path="/admin/newproject" element={<NewProject />} />

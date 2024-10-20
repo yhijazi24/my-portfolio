@@ -12,7 +12,7 @@ import NewProject from './pages/NewProject';
 import Topbar from './conponents/Topbar';
 import Sidebar from './conponents/Sidebar';
 import HomeHeader from './pages/HomeHeader';
-import HomeProjects from './pages/HomeProjects'; 
+import HomeProjects from './pages/HomeProjects';
 import Footer from './pages/Footer';
 import Contact from './pages/Contact';
 import { useEffect, useState } from "react";
@@ -37,38 +37,14 @@ function App() {
 
   return (
     <div>
-      <Router>
-        {admin && (
-          <>
-            <Topbar />
-            <div className="container">
-              <Sidebar />
-            </div>
-          </>
-        )}
-        
-        <Routes>
-          <Route 
-            path="/login" 
-            element={admin ? <Navigate to="/" /> : <Login />}  
-          />
-          {admin && (
-            <>
-              <Route exact path='/' element={<ProjectList />} />
-              <Route exact path='/project/:id' element={<Project />} />
-              <Route exact path='/newproject' element={<NewProject />} />
-              <Route exact path='/homeHeader' element={<HomeHeader />} />
-              <Route exact path='/homeProjects' element={<HomeProjects />} />
-              <Route exact path='/footer' element={<Footer />} />
-              <Route exact path='/contact' element={<Contact />} />
-            </>
-          )}
-          <Route 
-            path="*" 
-            element={admin ? <Navigate to="/" /> : <Navigate to="/login" />} 
-          />
-        </Routes>
-      </Router>
+      {admin && (
+        <>
+          <Topbar />
+          <div className="container">
+            <Sidebar />
+          </div>
+        </>
+      )}
     </div>
   );
 }
