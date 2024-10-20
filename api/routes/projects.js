@@ -18,7 +18,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 
 
 //Update
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 
     try {
         const updatedProject = await Project.findByIdAndUpdate(req.params.id, {
@@ -56,7 +56,7 @@ router.get("/find/:title", async (req, res) => {
 });
 
 
-//Get bi ID
+//Get by ID
 router.get("/:id", async (req, res) => {
   try {
       const project = await Project.findById(req.params.id);
