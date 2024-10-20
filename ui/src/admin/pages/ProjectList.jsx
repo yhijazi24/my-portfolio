@@ -3,6 +3,7 @@ import './css/projectList.css';
 import { Link } from "react-router-dom";
 import { deleteProject, getAllProjects } from "../redux/apiCalls";
 import { DeleteOutline } from '@mui/icons-material';
+import { DataGrid } from '@mui/x-data-grid';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
