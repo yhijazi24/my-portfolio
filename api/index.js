@@ -13,15 +13,18 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
+const allowedOrigins = ['https://main.dskc3hnhs7ow3.amplifyapp.com'];
+const origin = req.headers.origin;
+if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+}
 
-// CORS Middleware
 const corsOptions = {
     origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
-    credentials: true, // Allow credentials
-    optionsSuccessStatus: 200 // For legacy browser support
+    credentials: true,
+    optionsSuccessStatus: 200
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 
