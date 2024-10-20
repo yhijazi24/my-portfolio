@@ -14,12 +14,12 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration
-app.use(cors({
+// Use cors middleware and let it handle everything
+const corsOptions = {
     origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
-    credentials: true,  // If you're dealing with cookies or credentials
     optionsSuccessStatus: 200
-}));
+};
+app.use(cors(corsOptions));
 
 // Middleware to handle JSON requests
 app.use(express.json());
