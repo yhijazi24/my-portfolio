@@ -72,12 +72,13 @@
 
     .navbar-links {
         position: absolute;
-        background-color: white;
+        background-color: #fff;
         width: 100%;
-        top: 7.5%;
+        top: 74px;
         left: 0;
         padding: 20px 0;
         flex-direction: column;
+        z-index: 1000;
     }
 
     .navbar-link {
