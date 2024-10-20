@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './css/project.css';
-import { Link, useParams } from "react-router-dom"; // Import useParams
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Publish } from '@mui/icons-material';
 import { updateProject, getProject } from "../redux/apiCalls";
@@ -11,7 +11,8 @@ import Sidebar from '../conponents/Sidebar';
 
 const Project = () => {
     const dispatch = useDispatch();
-    const { projectId } = useParams(); // Use useParams to extract projectId from URL
+    const location = useLocation();
+    const projectId = location.pathname.split("/")[4];
     const [file, setFile] = useState(null); // For handling file uploads
     const [inputs, setInputs] = useState({
         title: '',
@@ -27,7 +28,7 @@ const Project = () => {
         const fetchProject = async () => {
             if (projectId) {
                 try {
-                    console.log("Fetching project with ID:", projectId); // Now it should show the correct ID
+                    console.log("Fetching project with ID:", projectId);
                     const projectData = await getProject(projectId); // Fetch the project by ID
                     console.log("Fetched project data:", projectData);
                     setInputs({
