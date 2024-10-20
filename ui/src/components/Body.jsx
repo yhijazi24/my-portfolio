@@ -64,7 +64,6 @@ const Body = () => {
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={50}
           slidesPerView={1}
-          navigation
           pagination={{ clickable: true }}
           className='swiper-container'
         >
