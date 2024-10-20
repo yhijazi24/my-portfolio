@@ -20,7 +20,6 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
-
 // Middleware to handle JSON requests
 app.use(express.json());
 
