@@ -19,8 +19,6 @@ const corsOptions = {
     origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
     optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
-// Middleware to handle JSON requests
 app.use(express.json());
 
 // Database connection
