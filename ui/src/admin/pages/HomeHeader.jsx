@@ -5,6 +5,8 @@ import { getHomeHeader, updateHomeHeader } from '../redux/apiCalls';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import app from "../firebase";
 import { useDispatch } from 'react-redux';
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
@@ -114,7 +116,9 @@ const HomeHeader = () => {
     }
   };
 
-  return (
+  return (<>
+    <Topbar />
+        <Sidebar />
     <div className="homeHeader">
       <div className="homeHeaderTitleContainer">
         <h1 className="homeHeaderTitle">Edit Home Header</h1>
@@ -216,7 +220,7 @@ const HomeHeader = () => {
           {error && <p className="errorMessage">{error}</p>}
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

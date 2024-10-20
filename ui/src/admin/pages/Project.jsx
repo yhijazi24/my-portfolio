@@ -6,6 +6,8 @@ import { Publish } from '@mui/icons-material';
 import { updateProject, getProject } from "../redux/apiCalls";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase"; // Import Firebase storage
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const Project = () => {
     const dispatch = useDispatch();
@@ -107,6 +109,9 @@ const Project = () => {
     };
 
     return (
+        <>
+        <Topbar />
+        <Sidebar />
         <div className="project">
             <div className="projectTitleContainer">
                 <h1 className="projectTitle">Project</h1>
@@ -221,7 +226,7 @@ const Project = () => {
                     </div>
                 </form>
             </div>
-        </div>
+        </div></>
     );
 };
 

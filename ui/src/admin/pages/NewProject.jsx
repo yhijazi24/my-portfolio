@@ -4,6 +4,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import app from "../firebase";
 import { useDispatch } from "react-redux";
 import { addProject } from "../redux/apiCalls";
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const NewProject = () => {
   const dispatch = useDispatch();
@@ -72,7 +74,9 @@ const NewProject = () => {
     }
   };
 
-  return (
+  return (<>
+    <Topbar />
+        <Sidebar />
     <div className="newProject">
       <h1 className="newProjectTitle">New Project</h1>
       <form className="newProjectForm" onSubmit={handleSubmit}>
@@ -148,7 +152,7 @@ const NewProject = () => {
         <button className="newProjectButton" type="submit">Create</button>
       </form>
       {successMessage && <p className="successMessage">{successMessage}</p>} {/* Display success message */}
-    </div>
+    </div></>
   );
 };
 

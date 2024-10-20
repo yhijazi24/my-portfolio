@@ -4,6 +4,8 @@ import { getHomeProjects, updateHomeProject } from "../redux/apiCalls";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import app from "../firebase";
 import { Publish } from '@mui/icons-material';
+import Sidebar from '../conponents/Sidebar';
+import Topbar from '../conponents/Topbar';
 
 const HomeProject = () => {
   const [projectData, setProjectData] = useState([]);
@@ -86,7 +88,9 @@ const HomeProject = () => {
     }
   };
 
-  return (
+  return (<>
+    <Topbar />
+        <Sidebar />
     <div className="homeProject">
       {projectData.length > 0 ? (
         updatedProjects.map((project) => (
@@ -150,7 +154,7 @@ const HomeProject = () => {
       ) : (
         <p>No projects available</p>
       )}
-    </div>
+    </div></>
   );
 };
 

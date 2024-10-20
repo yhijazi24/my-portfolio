@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './css/contact.css'
+import Topbar from '../conponents/Topbar'
+import Sidebar from '../conponents/Sidebar'
+
 import { userRequest } from '../../requestMethods';
 import { getSubmissions } from '../redux/apiCalls';
 
@@ -21,7 +24,11 @@ const Contact = () => {
         fetchSubmissions();
     }, []);
     return (
+        <>
+        <Topbar />
+        <Sidebar />
         <div className="admin-submissions">
+            
             <h2>Contact Form Submissions</h2>
             {error && <p className="error-message">{error}</p>}
             {submissions.length > 0 ? (
@@ -51,6 +58,7 @@ const Contact = () => {
                 <p>No submissions yet.</p>
             )}
         </div>
+        </>
     );
 };
 

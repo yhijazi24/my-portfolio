@@ -12,7 +12,6 @@ import HomeHeader from './admin/pages/HomeHeader';
 import HomeProjects from './admin/pages/HomeProjects';
 import Footer from './admin/pages/Footer';
 import ContactAdmin from './admin/pages/Contact';
-import Admin from './admin/Admin';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -44,7 +43,7 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
-        <Route path="/admin/*" element={admin ? <Admin /> : <Navigate to="/admin/login" />} />
+        <Route path="/admin/*" element={admin ? <ProjectList /> : <Navigate to="/admin/login" />} />
         {admin && (
           <>
             <Route exact path="/admin" element={<ProjectList />} />

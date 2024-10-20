@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { deleteProject, getAllProjects } from "../redux/apiCalls";
 import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
@@ -77,6 +79,9 @@ const ProjectList = () => {
     ];
 
     return (
+        <>
+        <Topbar />
+        <Sidebar />
         <div className="projectList">
             <DataGrid
                 rows={projects}
@@ -86,7 +91,7 @@ const ProjectList = () => {
                 pageSize={8}
                 checkboxSelection
             />
-        </div>
+        </div></>
     );
 };
 

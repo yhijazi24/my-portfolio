@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './css/footer.css';  // Adjusted to footer
 import { getFooter, updateFooter } from '../redux/apiCalls';  // Adjusted API call for Footer
 import { useDispatch } from 'react-redux';
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,9 @@ const Footer = () => {
     }
   };
 
-  return (
+  return (<>
+    <Topbar />
+        <Sidebar />
     <div className="footer">
       <div className="footerTitleContainer">
         <h1 className="footerTitle">Edit Footer</h1>
@@ -100,7 +104,7 @@ const Footer = () => {
           {success && <p className="successMessage">Footer updated successfully!</p>}
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 
