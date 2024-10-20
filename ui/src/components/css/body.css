@@ -43,7 +43,6 @@
     text-align: justify;
     letter-spacing: 1px;
     line-height: 1.5em;
-    margin: auto;
     word-wrap: break-word;
     word-break: break-word;
     font-weight: 300;
@@ -332,7 +331,7 @@
 
     .content-title {
 
-        font-size: 35px;
+        font-size: 30px;
         margin-left: 15px;
     }
 
@@ -352,10 +351,9 @@
     }
 }
 
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 461px) {
     .content-title {
         margin-right: 0;
-        font-size: 40px;
     }
 
     .content-info {
