@@ -15,8 +15,15 @@ dotenv.config();
 const app = express();
 app.use(cors({
     origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
+    credentials: true,  // if you're sending cookies/auth tokens, set this to true
+    optionsSuccessStatus: 200
 }));
+
 app.use(express.json());
+app.use((req, res, next) => {
+    console.log(res.getHeaders());
+    next();
+});
 
 // Database connection
 mongoose.connect(process.env.MONGO_URL)
