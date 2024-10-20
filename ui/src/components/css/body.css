@@ -195,12 +195,16 @@
     color: #415A77;
     transition: background-color 0.7s ease, color 0.7s ease;
     cursor: pointer;
+    min-width: fit-content;
+    min-height: fit-content;
 }
 
 .list-button:hover,
 .list-button.swiper-pagination-bullet-active {
     background-color: #415A77;
     color: white;
+    min-width: fit-content;
+    min-height: fit-content;
 }
 
 /* Background for the pagination container */
@@ -213,6 +217,9 @@
     justify-content: space-between;
     padding: 10px;
     column-gap: 10px;
+    max-width: 550px;
+    flex-wrap: wrap;
+
 }
 
 .content {
