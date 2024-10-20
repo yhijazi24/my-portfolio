@@ -183,7 +183,7 @@
 
 
 /* Custom styles for your text-based buttons */
-.list-button {
+.pagination-item {
     font-size: 24px;
     font-weight: 400;
     letter-spacing: 2.5px;
@@ -199,8 +199,8 @@
     min-height: fit-content;
 }
 
-.list-button:hover,
-.list-button.swiper-pagination-bullet-active {
+.pagination-item:hover,
+.pagination-item.active {
     background-color: #415A77;
     color: white;
     min-width: fit-content;
@@ -208,7 +208,7 @@
 }
 
 /* Background for the pagination container */
-.swiper-pagination {
+.custom-pagination{
     background-color: #E0E1DD;
     border-radius: 50px;
     display: flex;
