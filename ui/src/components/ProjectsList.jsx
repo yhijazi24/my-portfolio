@@ -42,13 +42,14 @@ const ProjectsList = () => {
     if (filters.length > 0) {
       setFilteredProjects(
         projects.filter((project) =>
-          filters.every((filter) => project.lang.includes(filter))
+          filters.some((filter) => project.lang.includes(filter)) // <-- Change here
         )
       );
     } else {
       setFilteredProjects(projects); 
     }
   }, [projects, filters]);
+  
 
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const currentProjects = filteredProjects.slice(
