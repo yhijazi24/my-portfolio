@@ -9,10 +9,10 @@ import ProjectList from './admin/pages/ProjectList';
 import Project from './admin/pages/Project';
 import NewProject from './admin/pages/NewProject';
 import HomeHeader from './admin/pages/HomeHeader';
-import HomeProjects from './admin/pages/HomeProjects'; 
+import HomeProjects from './admin/pages/HomeProjects';
 import Footer from './admin/pages/Footer';
 import ContactAdmin from './admin/pages/Contact';
-import Admin from './admin/Admin'
+import Admin from './admin/Admin';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -41,12 +41,12 @@ function App() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/projects" element={<Projects />} />
         <Route exact path="/project/:title" element={<ProjectPage />} />
-        
+
         {/* Admin Routes */}
         <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
+        <Route path="/admin/*" element={admin ? <Admin /> : <Navigate to="/admin/login" />} />
         {admin && (
           <>
-          <Admin />
             <Route exact path="/admin" element={<ProjectList />} />
             <Route exact path="/admin/project/:id" element={<Project />} />
             <Route exact path="/admin/newproject" element={<NewProject />} />
