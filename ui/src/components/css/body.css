@@ -312,7 +312,7 @@
 @media only screen and (max-width:680px) {
     .content {
 
-        width: 95%;
+        width: 90%;
     }
 }
 @media only screen and (max-width:700px) {
@@ -329,18 +329,17 @@
 }
 
 @media only screen and (max-width: 575px) {
-    .content-info {
-
-        max-width: 350px;
-    }
 
     .content-title {
 
         font-size: 35px;
+        margin-left: 15px;
     }
 
     .content-info {
+        max-width: 350px;
         font-size: 18px;
+        margin-left: 15px;
     }
 
     .body-list {
