@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Navigation, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import './css/body.css'; // Assuming your custom styles are here
 import axios from 'axios';
 
 const Body = () => {
   const [home, setHome] = useState({});
+  const [swiperInstance, setSwiperInstance] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const labels = ['HOME', 'ABOUT ME', 'RESUME'];
 
   useEffect(() => {
     const getHome = async () => {
@@ -22,22 +24,25 @@ const Body = () => {
     getHome();
   }, []);
 
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      const labels = ['HOME', 'ABOUT ME', 'RESUME'];
-      return '<span class="list-button ' + className + '">' + labels[index] + '</span>';
-    },
-  };  
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.activeIndex);
+  };
+
+  const goToSlide = (index) => {
+    if (swiperInstance) {
+      swiperInstance.slideTo(index);
+    }
+  };
 
   return (
     <div className='body-container'>
       <div className='body-wrapper'>
         <Swiper
-          modules={[Navigation, Pagination, A11y]}
+          modules={[Navigation, A11y]}
           spaceBetween={50}
           slidesPerView={1}
-          pagination={pagination}
+          onSlideChange={handleSlideChange}
+          onSwiper={setSwiperInstance}
           className='swiper-container'
         >
           <SwiperSlide>
@@ -69,6 +74,19 @@ const Body = () => {
             </div>
           </SwiperSlide>
         </Swiper>
+      </div>
+
+      {/* Custom Pagination */}
+      <div className='custom-pagination'>
+        {labels.map((label, index) => (
+          <span
+            key={index}
+            className={`pagination-item ${activeIndex === index ? 'active' : ''}`}
+            onClick={() => goToSlide(index)}
+          >
+            {label}
+          </span>
+        ))}
       </div>
     </div>
   );
