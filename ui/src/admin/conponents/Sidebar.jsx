@@ -11,36 +11,31 @@ const Sidebar = () => {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
+            <Link to="/admin" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Projects
               </li>
             </Link>
-            <Link to="/homeHeader" className="link">
+            <Link to="/admin/homeHeader" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Home Header
               </li>
             </Link>
-            <Link to="/homeProjects" className="link">
+            <Link to="/admin/homeProjects" className="link">
               <li className="sidebarListItem">
                 <TabUnselectedOutlined className="sidebarIcon" />
                 Home Projects
               </li>
             </Link>
-            <Link to="/footer" className="link">
+            <Link to="/admin/footer" className="link">
               <li className="sidebarListItem">
                 <DashboardOutlined className="sidebarIcon" />
                 Footer
               </li>
             </Link>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
-          <ul className="sidebarList">
-          <Link to="/contact" className="link">
+            <Link to="/admin/contact" className="link">
             <li className="sidebarListItem">
               <MailOutline className="sidebarIcon" />
               Mail
