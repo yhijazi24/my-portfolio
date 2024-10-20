@@ -20,11 +20,9 @@
 
 .content-title {
     margin-top: 0;
-    margin-right: 20px;
-    padding-right: 40px;
     font-size: 80px;
     color: white;
-    text-align: end;
+    text-align: center;
     cursor: pointer;
     perspective: 1000px;
     word-wrap: break-word;
@@ -229,7 +227,6 @@
     display: flex;
     transition: transform 0.5s ease;
     align-items: center;
-    overflow: hidden;
 }
 
 .swiper-slide {
@@ -298,6 +295,11 @@
         min-height: 100vh;
     }
 }
+@media only screen and (max-width:918px) {
+    .content-title {
+        font-size: 60px;
+    }
+}
 
 @media only screen and (max-width:700px) {
     .content-info {
@@ -308,9 +310,7 @@
    
 
     .content-title {
-        font-size: 60px;
-        word-wrap: break-word;
-        word-break: break-word;
+        font-size: 50px;
     }
 }
 
