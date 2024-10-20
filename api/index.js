@@ -21,13 +21,6 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 
-// Log headers to check for duplicates
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://main.dskc3hnhs7ow3.amplifyapp.com');
-    console.log('CORS Headers:', res.getHeaders()); // Logs headers to verify
-    next();
-});
-
 // Handle preflight requests for all routes (OPTIONS method)
 app.options('*', cors());
 
