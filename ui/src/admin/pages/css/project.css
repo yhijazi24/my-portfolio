@@ -1,0 +1,197 @@
+/* General container for the project page */
+.project {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.projectTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.projectTitle {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.projectAddButton {
+    padding: 10px;
+    background-color: #3bb077;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.projectTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectTopRight, .projectTopLeft {
+    flex: 1;
+    padding: 20px;
+}
+
+.projectInfoTop {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.projectInfoImg {
+    width: auto;
+    height: 200px;
+    border: 2px solid #ddd;
+}
+.projectImg{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.projectInfo{
+    flex:1;
+}
+
+.projectName {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.projectInfoBottom {
+    margin-top: 20px;
+}
+
+.projectInfoItem {
+    margin-bottom: 10px;
+}
+
+.projectInfoKey {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.projectInfoValue {
+    font-weight: 300;
+}
+
+.projectBottom {
+    padding: 20px;
+}
+
+.projectForm {
+    display: flex;
+    gap: 20px;
+}
+
+.projectFormLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.projectFormLeft label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.projectFormLeft input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.projectFormRight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.projectUpload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+}
+
+.projectUploadImg {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.projectUpload label {
+    cursor: pointer;
+    color: #3bb077;
+    font-size: 24px;
+}
+
+.projectButton {
+    padding: 10px;
+    background-color: #3bb077;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Styles for the image thumbnail grid */
+.projectThumbnails {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.projectThumbnail {
+    position: relative;
+    cursor: pointer;
+}
+
+.projectThumbnail img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.projectThumbnail .deleteIcon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    padding: 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Hover effect for delete icon */
+.projectThumbnail:hover .deleteIcon {
+    display: block;
+}
+
+
+.projectImageContainer{
+    display: flex;
+    flex-direction: column;
+}

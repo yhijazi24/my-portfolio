@@ -1,27 +1,74 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
 import ProjectPage from './components/ProjectPage';
-import Admin from '../../admin/src/App'
-import './App.css'
+import AdminLogin from './admin/pages/Login';
+import ProjectList from './admin/pages/ProjectList';
+import Project from './admin/pages/Project';
+import NewProject from './admin/pages/NewProject';
+import HomeHeader from './admin/pages/HomeHeader';
+import HomeProjects from './admin/pages/HomeProjects'; 
+import Footer from './admin/pages/Footer';
+import ContactAdmin from './admin/pages/Contact';
+import Topbar from './admin/conponents/Topbar';
+import Sidebar from './admin/conponents/Sidebar';
 import ScrollToTop from './ScrollToTop';
+import './App.css';
 
-const App = () => {
+function App() {
+  const [admin, setAdmin] = useState(null);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("persist:root");
+    if (storedData) {
+      const user = JSON.parse(storedData)?.user;
+      const isAdmin = user && JSON.parse(user).currentUser?.isAdmin;
+      setAdmin(isAdmin);
+    }
+  }, []);
+
+  if (admin === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
-      <ScrollToTop/>
+      <ScrollToTop />
+      {admin && (
+        <>
+          <Topbar />
+          <div className="container">
+            <Sidebar />
+          </div>
+        </>
+      )}
+
       <Routes>
+        {/* UI Routes */}
         <Route exact path="/" element={<Home />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/projects" element={<Projects />} />
         <Route exact path="/project/:title" element={<ProjectPage />} />
-        <Route exact path="/admin" element={<Admin />} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
+        {admin && (
+          <>
+            <Route exact path="/admin" element={<ProjectList />} />
+            <Route exact path="/admin/project/:id" element={<Project />} />
+            <Route exact path="/admin/newproject" element={<NewProject />} />
+            <Route exact path="/admin/homeHeader" element={<HomeHeader />} />
+            <Route exact path="/admin/homeProjects" element={<HomeProjects />} />
+            <Route exact path="/admin/footer" element={<Footer />} />
+            <Route exact path="/admin/contact" element={<ContactAdmin />} />
+          </>
+        )}
+        <Route path="*" element={admin ? <Navigate to="/admin" /> : <Navigate to="/admin/login" />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

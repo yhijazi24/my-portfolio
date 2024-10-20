@@ -1,0 +1,70 @@
+.footer {
+    flex: 4;
+    padding: 20px;
+}
+
+.footerTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footerAddButton {
+    width: 120px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px; 
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.footerContainer {
+    display: flex;
+}
+
+.footerShow {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.footerShowTop {
+    display: flex;
+    align-items: center;
+}
+
+.footerShowImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.footerShowTopTitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.footerUpdate {
+    flex: 2;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.footerUpdateTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.footerUpdateForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerUpdateLeft {
+    flex: 1;
+}
