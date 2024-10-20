@@ -13,12 +13,6 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ['https://main.dskc3hnhs7ow3.amplifyapp.com'];
-const origin = req.headers.origin;
-if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-}
-
 const corsOptions = {
     origin: "https://main.dskc3hnhs7ow3.amplifyapp.com",
     credentials: true,
