@@ -118,7 +118,7 @@ const ProjectsList = () => {
                       ))}
                     </div>
                     <div className='button-wrapper'>
-                      <Link to={`/project/${project.title}`}>
+                      <Link to={`/projects/${project.title}`}>
                         <button className='project-list-button'> MORE </button>
                       </Link>
                     </div>

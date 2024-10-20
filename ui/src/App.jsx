@@ -39,7 +39,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/projects" element={<Projects />} />
-        <Route exact path="/project/:title" element={<ProjectPage />} />
+        <Route exact path="/projects/:title" element={<ProjectPage />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
