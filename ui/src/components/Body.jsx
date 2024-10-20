@@ -22,6 +22,14 @@ const Body = () => {
     getHome();
   }, []);
 
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      const labels = ['HOME', 'ABOUT ME', 'RESUME'];
+      return '<span class="list-button ' + className + '">' + labels[index] + '</span>';
+    },
+  };  
+
   return (
     <div className='body-container'>
       <div className='body-wrapper'>
@@ -29,13 +37,7 @@ const Body = () => {
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={50}
           slidesPerView={1}
-          pagination={{
-            clickable: true,
-            renderBullet: (index, className) => {
-              const labels = ['HOME', 'ABOUT ME', 'RESUME'];
-              return `<button class="list-button ${className}">${labels[index]}</button>`;
-            },
-          }}
+          pagination={pagination}
           className='swiper-container'
         >
           <SwiperSlide>

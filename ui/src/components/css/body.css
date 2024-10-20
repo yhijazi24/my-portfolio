@@ -180,12 +180,7 @@
     color: transparent;
 }
 
-/* Hide the default circles from Swiper pagination */
-.swiper-pagination-bullet {
-    width: 0;
-    height: 0;
-    display: none; /* Ensures the default bullet circles are completely hidden */
-}
+
 
 /* Custom styles for your text-based buttons */
 .list-button {
