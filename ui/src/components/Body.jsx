@@ -77,11 +77,11 @@ const Body = () => {
       </div>
 
       {/* Custom Pagination */}
-      <div className='custom-pagination'>
+      <div className='swiper-pagination custom-pagination'>
         {labels.map((label, index) => (
           <span
             key={index}
-            className={`pagination-item ${activeIndex === index ? 'active' : ''}`}
+            className={`list-button pagination-item ${activeIndex === index ? 'active' : ''}`}
             onClick={() => goToSlide(index)}
           >
             {label}
