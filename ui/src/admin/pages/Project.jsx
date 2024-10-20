@@ -115,7 +115,7 @@ const Project = () => {
         <div className="project">
             <div className="projectTitleContainer">
                 <h1 className="projectTitle">Project</h1>
-                <Link to="/newproject">
+                <Link to="/admin/newproject">
                     <button className="projectAddButton">Create</button>
                 </Link>
             </div>

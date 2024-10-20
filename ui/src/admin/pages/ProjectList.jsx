@@ -65,7 +65,7 @@ const ProjectList = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/project/" + params.row._id}>
+                        <Link to={"/admin/project/" + params.row._id}>
                             <button className="projectListEdit">Edit</button>
                         </Link>
                         <DeleteOutline
