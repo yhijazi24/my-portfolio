@@ -180,6 +180,7 @@
     color: transparent;
 }
 
+/* Styles for pagination buttons */
 .list-button {
     font-size: 24px;
     font-weight: 400;
@@ -190,22 +191,18 @@
     border: none;
     background-color: transparent;
     color: #415A77;
-    transition: background-color .7s ease, color .7s ease;
-
+    transition: background-color 0.7s ease, color 0.7s ease;
+    cursor: pointer;
 }
-
-.content {
-    padding: 60px 0;
-}
-
 
 .list-button:hover,
-.list-button.active {
+.list-button.swiper-pagination-bullet-active {
     background-color: #415A77;
     color: white;
 }
 
-.body-list {
+/* Background for the wrapper of the buttons (if you need it to resemble the old .body-list) */
+.swiper-pagination {
     background-color: #E0E1DD;
     border-radius: 50px;
     display: flex;
@@ -214,6 +211,11 @@
     justify-content: space-between;
     flex-wrap: wrap;
     column-gap: 10px;
+    padding: 10px;
+}
+
+.content {
+    padding: 60px 0;
 }
 
 .swiper-container {

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './css/body.css';
+import './css/body.css'; // Assuming your custom styles are here
 import axios from 'axios';
 
 const Body = () => {
@@ -32,9 +32,8 @@ const Body = () => {
           pagination={{
             clickable: true,
             renderBullet: (index, className) => {
-              // Customize the bullet pagination here
               const labels = ['HOME', 'ABOUT ME', 'RESUME'];
-              return `<span class="${className}">${labels[index]}</span>`;
+              return `<button class="list-button ${className}">${labels[index]}</button>`;
             },
           }}
           className='swiper-container'
