@@ -85,7 +85,7 @@
     row-gap: 10px;
 }
 
-.project-list-filter-button.active-filter,
+.project-list-filter-button,
 .filter-button,
 .filter-less,
 .filter-more {
@@ -100,6 +100,9 @@
 }
 .project-list-filter-button{
     opacity: .5;
+}
+.project-list-filter-button.active-filter{
+    opacity: 1;
 }
 .filter-buttons-wrapper {
     opacity: 0;
