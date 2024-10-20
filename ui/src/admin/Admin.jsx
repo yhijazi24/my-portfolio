@@ -1,20 +1,6 @@
 import './Admin.css';
-import Login from "./pages/Login";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate
-} from "react-router-dom";
-import ProjectList from './pages/ProjectList';
-import Project from './pages/Project';
-import NewProject from './pages/NewProject';
 import Topbar from './conponents/Topbar';
 import Sidebar from './conponents/Sidebar';
-import HomeHeader from './pages/HomeHeader';
-import HomeProjects from './pages/HomeProjects';
-import Footer from './pages/Footer';
-import Contact from './pages/Contact';
 import { useEffect, useState } from "react";
 
 function App() {
