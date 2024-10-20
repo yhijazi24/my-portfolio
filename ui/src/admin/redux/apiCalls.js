@@ -44,7 +44,7 @@ export const logoutUser = async (dispatch) => {
 
 export const getProject = async (id) => {
   try {
-      const response = await userRequest.get(`/projects/${id}`);
+      const response = await publicRequest.get(`/projects/${id}`);
       console.log('Project data:', response.data); // Log the response data
       return response.data;
   } catch (error) {
@@ -52,9 +52,6 @@ export const getProject = async (id) => {
       throw error; // Rethrow the error to handle it in the component
   }
 };
-
-
-
 
 export const getAllProjects = async () => {
   try {
@@ -87,6 +84,7 @@ export const updateProject = async (id, project, dispatch) => {
       throw new Error(err.message);
   }
 };
+
 
 
 export const addProject = async (project) => {
