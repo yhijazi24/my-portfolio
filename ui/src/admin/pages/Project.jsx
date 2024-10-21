@@ -12,7 +12,7 @@ import Sidebar from '../conponents/Sidebar';
 const Project = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const projectId = location.pathname.split("/")[4];
+    const projectId = location.pathname.split("/")[3];
     const [file, setFile] = useState(null); // For handling file uploads
     const [inputs, setInputs] = useState({
         title: '',
