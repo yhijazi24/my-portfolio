@@ -13,3 +13,6 @@ cmds = ["npm start"]
 [phases.start_ui]
 directory = "ui"
 cmds = ["npm start"]
+
+[start]
+cmds = ["npm run start_api", "npm run start_ui"]
