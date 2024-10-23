@@ -13,7 +13,12 @@ const contactRoute = require("./routes/contact");
 dotenv.config();
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'build')));
 
+// Handle any other requests and send the React index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 // Use cors middleware and let it handle everything
 const corsOptions = {
     origin: 'https://main.dskc3hnhs7ow3.amplifyapp.com',
