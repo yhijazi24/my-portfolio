@@ -10,7 +10,7 @@ const HomeProjects = () => {
   useEffect(() => {
     const fetchProjectsData = async () => {
       try {
-        const response = await axios.get("https://13.36.69.227.nip.io/homeProject/");
+        const response = await axios.get("http://localhost:5000/homeProject/");
         console.log("Fetched Data:", response.data);
         setProjectsData(response.data[0]); 
       } catch (error) {

@@ -23,7 +23,7 @@ const ProjectsList = () => {
   useEffect(() => {
     const getProjects = async () => {
       try {
-        const res = await axios.get(`https://13.36.69.227.nip.io/projects/`);
+        const res = await axios.get(`http://localhost:5000/projects/`);
         setProjects(res.data);
       } catch (err) {
         console.error(err);

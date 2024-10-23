@@ -1,0 +1,15 @@
+[[env]]
+key = "NODE_ENV"
+value = "production"
+
+[[service]]
+name = "api"
+path = "api"
+build = "npm install"
+start = "npm run start"
+
+[[service]]
+name = "ui"
+path = "ui"
+build = "npm install && npm run build"
+start = "npm run start"

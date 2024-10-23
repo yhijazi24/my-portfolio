@@ -15,7 +15,7 @@ const Body = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const res = await axios.get("https://13.36.69.227.nip.io/homeHeader/");
+        const res = await axios.get("http://localhost:5000/homeHeader/");
         setHome(res.data[0]);
       } catch (err) {
         console.error("Error fetching data: ", err.response ? err.response.data : err.message);
