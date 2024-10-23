@@ -11,5 +11,5 @@ start = "npm start"     # This will start the API in production mode
 [[service]]
 name = "ui"
 path = "ui"
-build = "npm install && npm run build"  # Install and build the UI
+build = "npm install && npx vite build"  # Install and build the UI
 start = "npm start"  # This will start the UI server
