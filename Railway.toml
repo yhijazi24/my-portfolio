@@ -12,4 +12,4 @@ start = "npm start"
 name = "ui"
 path = "ui"
 build = "npm install && npm run build"
-start = "serve -s build"  # Use this if you're serving static files
+start = "npm run dev"  # Use this if you're serving static files
