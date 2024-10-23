@@ -1,0 +1,69 @@
+.newProject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .newProjectTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .newProjectForm {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .successMessage {
+    color: #4CAF50; /* Green color */
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  
+  .newProjectItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .newProjectItem label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .newProjectItem input,
+  .newProjectItem textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .newProjectItem input[type="file"] {
+    border: none;
+  }
+  
+  .newProjectButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  
+  .newProjectButton:hover {
+    background-color: #45a049;
+  }
+  
