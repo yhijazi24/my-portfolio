@@ -5,11 +5,11 @@ value = "production"
 [[service]]
 name = "api"
 path = "api"
-build = "npm install"
-start = "npm start"
+build = "npm install"  # This will install dependencies for the API
+start = "npm start"     # This will start the API in production mode
 
 [[service]]
 name = "ui"
 path = "ui"
-build = "npm install && npm run build"
-start = "npm run dev"  # Use this if you're serving static files
+build = "npm install && npm run build"  # Install and build the UI
+start = "npm start"  # This will start the UI server
