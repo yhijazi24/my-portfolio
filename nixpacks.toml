@@ -1,0 +1,19 @@
+[[phases]]
+name = "Install dependencies for API"
+directory = "api"
+cmds = ["npm install"]
+
+[[phases]]
+name = "Build UI"
+directory = "ui"
+cmds = ["npm install", "npx vite build"]
+
+[[phases]]
+name = "Start API"
+directory = "api"
+cmds = ["npm start"]
+
+[[phases]]
+name = "Start UI"
+directory = "ui"
+cmds = ["npm start"]
