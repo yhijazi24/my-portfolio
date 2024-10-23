@@ -1,15 +1,11 @@
-[[env]]
-key = "NODE_ENV"
-value = "production"
-
 [[service]]
 name = "api"
 path = "api"
-build = "npm install"  # This will install dependencies for the API
-start = "npm start"     # This will start the API in production mode
+build = "npm install"  # Install dependencies
+start = "npm start"    # Start the API
 
 [[service]]
 name = "ui"
 path = "ui"
-build = "npm install && npx vite build"  # Install and build the UI
-start = "npm start"  # This will start the UI server
+build = "npm install"  # Install dependencies
+start = "npm run build"  # Change this to whatever starts your UI
