@@ -6,10 +6,10 @@ value = "production"
 name = "api"
 path = "api"
 build = "npm install"
-start = "npm run start"
+start = "npm start"
 
 [[service]]
 name = "ui"
 path = "ui"
 build = "npm install && npm run build"
-start = "npm run start"
+start = "npm run dev"
