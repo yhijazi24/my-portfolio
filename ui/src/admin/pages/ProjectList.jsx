@@ -6,7 +6,6 @@ import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import Topbar from '../conponents/Topbar';
 import Sidebar from '../conponents/Sidebar';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
@@ -33,15 +32,16 @@ const ProjectList = () => {
         }
     };
 
-    const handleOnDragEnd = (result) => {
-        if (!result.destination) return;
+    const moveProject = (index, direction) => {
+        const newProjects = [...projects];
+        const targetIndex = direction === 'up' ? index - 1 : index + 1;
 
-        const items = Array.from(projects);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-
-        setProjects(items);
-        // Optional: Persist the new order to the backend if needed
+        // Check bounds
+        if (targetIndex >= 0 && targetIndex < newProjects.length) {
+            // Swap the projects
+            [newProjects[index], newProjects[targetIndex]] = [newProjects[targetIndex], newProjects[index]];
+            setProjects(newProjects);
+        }
     };
 
     const columns = [
@@ -73,10 +73,25 @@ const ProjectList = () => {
         {
             field: "action",
             headerName: "Action",
-            width: 150,
+            width: 250,
             renderCell: (params) => {
+                const index = projects.findIndex(project => project._id === params.row._id);
                 return (
                     <>
+                        <button
+                            className="moveButton"
+                            onClick={() => moveProject(index, 'up')}
+                            disabled={index === 0} // Disable if it's already the first item
+                        >
+                            Move Up
+                        </button>
+                        <button
+                            className="moveButton"
+                            onClick={() => moveProject(index, 'down')}
+                            disabled={index === projects.length - 1} // Disable if it's already the last item
+                        >
+                            Move Down
+                        </button>
                         <Link to={"/admin/project/" + params.row._id}>
                             <button className="projectListEdit">Edit</button>
                         </Link>
@@ -95,45 +110,14 @@ const ProjectList = () => {
             <Topbar />
             <Sidebar />
             <div className="projectList">
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="droppable">
-                        {(provided) => (
-                            <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                                style={{ height: '100%' }} // Ensure the Droppable fills the container
-                            >
-                                <DataGrid
-                                    rows={projects}
-                                    disableSelectionOnClick
-                                    columns={columns}
-                                    getRowId={(row) => row._id}
-                                    pageSize={8}
-                                    rowHeight={100} // Adjust based on your needs
-                                    components={{
-                                        Row: (props) => {
-                                            const index = projects.findIndex(project => project._id === props.row._id);
-                                            return (
-                                                <Draggable key={props.row._id} draggableId={props.row._id} index={index}>
-                                                    {(provided) => (
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            <DataGrid.Row {...props} />
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            );
-                                        },
-                                    }}
-                                />
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                <DataGrid
+                    rows={projects}
+                    disableSelectionOnClick
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    pageSize={8}
+                    rowHeight={100} // Adjust based on your needs
+                />
             </div>
         </>
     );
