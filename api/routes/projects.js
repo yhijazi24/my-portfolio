@@ -30,9 +30,9 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 app.put('/updateOrder', async (req, res) => {
- 
+  const updatedProjects = req.body;
   try {
-    const updatedProjects = req.body;
+      // Loop through all the updated projects and save the new order
       for (let project of updatedProjects) {
           await Project.findByIdAndUpdate(project._id, { order: project.order });
       }
