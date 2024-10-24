@@ -13,6 +13,7 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log("Logging in with:", { email, password });
     login(dispatch, { email, password });
   };
  
