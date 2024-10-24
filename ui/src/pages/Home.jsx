@@ -5,6 +5,7 @@ import Body from '../components/Body'
 import HomeProjects from '../components/HomeProjects'
 import Name from '../components/Name'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <HomeProjects />
       <Name />
       <Footer />
+      <Link to={'/admin'}>ADMIN</Link>
     </div>
   )
 }
