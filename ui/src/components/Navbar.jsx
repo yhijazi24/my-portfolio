@@ -39,7 +39,7 @@ const Navbar = () => {
   useEffect(() => {
     const getFooter = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/footer/`);
+        const res = await axios.get(`https://portfolio-w14d.onrender.com/footer/`);
         console.log('Fetched Footer Data:', res.data);
         setFooter(res.data[0]);
       } catch (err) {
