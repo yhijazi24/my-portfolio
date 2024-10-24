@@ -15,7 +15,7 @@ const Body = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const res = await axios.get("https://portfolio-w14d.onrender.com/homeHeader/");
+        const res = await axios.get("https://my-portfolio0-drab.vercel.app/homeHeader/");
         setHome(res.data[0]);
       } catch (err) {
         console.error("Error fetching data: ", err.response ? err.response.data : err.message);
