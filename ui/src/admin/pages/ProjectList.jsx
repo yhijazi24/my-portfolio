@@ -41,7 +41,7 @@ const ProjectList = () => {
         items.splice(result.destination.index, 0, reorderedItem);
 
         setProjects(items);
-        // Here, you may want to persist the new order to your backend if necessary
+        // Optional: Persist the new order to the backend if needed
     };
 
     const columns = [
@@ -101,6 +101,7 @@ const ProjectList = () => {
                             <div
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
+                                style={{ height: '100%' }} // Ensure the Droppable fills the container
                             >
                                 <DataGrid
                                     rows={projects}
@@ -108,7 +109,6 @@ const ProjectList = () => {
                                     columns={columns}
                                     getRowId={(row) => row._id}
                                     pageSize={8}
-                                    checkboxSelection
                                     rowHeight={100} // Adjust based on your needs
                                     components={{
                                         Row: (props) => {
