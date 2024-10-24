@@ -1,0 +1,15 @@
+{
+    "builds": [
+      {
+        "src": "ui/package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/ui/$1"
+      }
+    ]
+  }
+  
