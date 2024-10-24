@@ -85,7 +85,14 @@ export const updateProject = async (id, project, dispatch) => {
       throw new Error(err.message);
   }
 };
-
+export const updateProjectOrder = async (updatedProjects) => {
+  try {
+      const res = await userRequest.put('/updateOrder', updatedProjects);
+      return res.data;
+  } catch (err) {
+      console.error("Failed to update project order", err);
+  }
+};
 
 
 export const addProject = async (project) => {

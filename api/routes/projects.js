@@ -29,6 +29,18 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
         res.status(500).json(err);
     }
 });
+app.put('/updateOrder', async (req, res) => {
+  const updatedProjects = req.body;
+  try {
+      // Loop through all the updated projects and save the new order
+      for (let project of updatedProjects) {
+          await Project.findByIdAndUpdate(project._id, { order: project.order });
+      }
+      res.status(200).json("Order updated successfully");
+  } catch (err) {
+      res.status(500).json(err);
+  }
+});
 
 //Delete
 
