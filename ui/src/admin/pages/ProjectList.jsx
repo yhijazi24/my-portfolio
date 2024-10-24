@@ -15,7 +15,6 @@ const ProjectList = () => {
             try {
                 const data = await getAllProjects();
                 console.log("Fetched Projects:", data);
-                // Sort projects based on their "order" field
                 const sortedProjects = data.sort((a, b) => a.order - b.order);
                 setProjects(sortedProjects);
             } catch (error) {
@@ -93,14 +92,14 @@ const ProjectList = () => {
                         <button
                             className="moveButton"
                             onClick={() => moveProject(index, 'up')}
-                            disabled={index === 0} // Disable if it's already the first item
+                            disabled={index === 0}
                         >
                             Move Up
                         </button>
                         <button
                             className="moveButton"
                             onClick={() => moveProject(index, 'down')}
-                            disabled={index === projects.length - 1} // Disable if it's already the last item
+                            disabled={index === projects.length - 1}
                         >
                             Move Down
                         </button>
@@ -128,7 +127,7 @@ const ProjectList = () => {
                     columns={columns}
                     getRowId={(row) => row._id}
                     pageSize={8}
-                    rowHeight={100} // Adjust based on your needs
+                    rowHeight={100}
                 />
             </div>
         </>
