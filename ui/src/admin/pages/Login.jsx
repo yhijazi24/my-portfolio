@@ -38,8 +38,7 @@ const Login = () => {
               <label htmlFor="password" className="login-form-label">Password<span className="required">*</span></label>
               <input className="login-input" type="password" placeholder="Enter your password" required onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <Link to={"/"}>
-            <button className="login-button" onClick={handleClick} disabled={isFetching}>LOGIN</button></Link>
+            <button className="login-button" onClick={handleClick} disabled={isFetching}>LOGIN</button>
             {error && <span className="login-error">Something went wrong...</span>}
           </form>
         </div>
