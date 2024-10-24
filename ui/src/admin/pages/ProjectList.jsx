@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { deleteProject, getAllProjects } from "../redux/apiCalls";
 import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
-import Topbar from '../components/Topbar';
-import Sidebar from '../components/Sidebar';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
@@ -31,17 +30,6 @@ const ProjectList = () => {
         } catch (err) {
             console.error("Failed to delete project:", err);
         }
-    };
-
-    const handleOnDragEnd = (result) => {
-        if (!result.destination) return;
-
-        const items = Array.from(projects);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-
-        setProjects(items);
-        // Here, you may want to persist the new order to your backend if necessary
     };
 
     const columns = [
@@ -92,50 +80,18 @@ const ProjectList = () => {
 
     return (
         <>
-            <Topbar />
-            <Sidebar />
-            <div className="projectList">
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="droppable">
-                        {(provided) => (
-                            <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                <DataGrid
-                                    rows={projects}
-                                    disableSelectionOnClick
-                                    columns={columns}
-                                    getRowId={(row) => row._id}
-                                    pageSize={8}
-                                    checkboxSelection
-                                    rowHeight={100} // Adjust based on your needs
-                                    components={{
-                                        Row: (props) => {
-                                            const index = projects.findIndex(project => project._id === props.row._id);
-                                            return (
-                                                <Draggable key={props.row._id} draggableId={props.row._id} index={index}>
-                                                    {(provided) => (
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            <DataGrid.Row {...props} />
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            );
-                                        },
-                                    }}
-                                />
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
-            </div>
-        </>
+        <Topbar />
+        <Sidebar />
+        <div className="projectList">
+            <DataGrid
+                rows={projects}
+                disableSelectionOnClick
+                columns={columns}
+                getRowId={(row) => row._id}
+                pageSize={8}
+                checkboxSelection
+            />
+        </div></>
     );
 };
 
