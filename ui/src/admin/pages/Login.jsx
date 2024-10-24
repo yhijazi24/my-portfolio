@@ -12,6 +12,7 @@ const Login = () => {
 
 
   const handleClick = (e) => {
+    console.log("Button clicked");
     e.preventDefault();
     console.log("Logging in with:", { email, password });
     login(dispatch, { email, password });
