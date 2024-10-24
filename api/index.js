@@ -17,7 +17,13 @@ const app = express();
 
 // Use cors middleware
 
-app.use(cors());
+
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://my-portfolio-sable-chi-29.vercel.app', // Replace '*' with the specific frontend domain if necessary
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+
 
 // Middleware to parse JSON
 app.use(express.json(
