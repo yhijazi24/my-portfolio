@@ -29,7 +29,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
         res.status(500).json(err);
     }
 });
-app.put('/updateOrder', async (req, res) => {
+router.put('/updateOrder', async (req, res) => {
   const updatedProjects = req.body;
   try {
       // Loop through all the updated projects and save the new order
