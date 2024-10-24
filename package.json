@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "dev": "concurrently \"npm start --prefix ./ui\" \"npm start --prefix ./api\""
-  },
-  "dependencies": {
-    "concurrently": "^9.0.1"
-  }
-}
