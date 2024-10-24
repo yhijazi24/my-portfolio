@@ -154,6 +154,8 @@
     width: auto;
     box-shadow: 3px 4px 14px 0px #6d88a7;
     border-radius: 5px;
+    scale: 1;
+    transition: scale .5s ease;
 }
 
 .project-list-cards {
@@ -218,6 +220,10 @@
 .project-list-card:hover .project-list-lang,
 .project-list-card:hover .project-list-title {
     opacity: 0;
+}
+
+.project-list-card:hover .project-list-image{
+    scale: 1.2;
 }
 
 .button-wrapper {
