@@ -38,7 +38,7 @@ const Login = () => {
               <label htmlFor="PASSWORD" className="login-form-label">Password<span className="required">*</span></label>
               <input className="login-input" id='PASSWORD' name='Password' type="password" placeholder="Enter your password"  required autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button className="login-button" onClick={handleClick} disabled={isFetching}>LOGIN</button>
+            <button className="login-button" onClick={handleClick}>LOGIN</button>
             {error && <span className="login-error">Something went wrong...</span>}
           </form>
         </div>
