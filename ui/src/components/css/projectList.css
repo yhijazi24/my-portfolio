@@ -206,7 +206,7 @@
     font-size: 24px;
     font-weight: 400;
     text-align: center;
-    transition: opacity .5s ease;
+    transition: opacity .8s ease;
 }
 
 .project-list-card:hover .button-wrapper {
