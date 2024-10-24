@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "my-portfolio0-drab.vercel.app";
+const BASE_URL = "https://my-portfolio0-drab.vercel.app";
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user ? JSON.parse(user).currentUser : null;
 const TOKEN = currentUser?.accessToken || "";
@@ -13,6 +13,7 @@ export const userRequest = axios.create({
     baseURL: BASE_URL,
     headers:{token:`Bearer ${TOKEN}`},
 });
+
  
 publicRequest.interceptors.response.use(
     response => {
