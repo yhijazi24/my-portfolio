@@ -31,12 +31,12 @@ const Login = () => {
           <h1 className="login-title">SIGN IN</h1>
           <form className='login-form'>
             <div className='login-label'>
-              <label htmlFor="username" className="login-form-label">Email<span className="required">*</span></label>
-              <input className="login-input" type="email" placeholder="Enter your email" required onChange={(e) => setEmail(e.target.value)} />
+              <label className="login-form-label">Email<span className="required">*</span></label>
+              <input className="login-input" id='EMAIL' name='Email' type="email" placeholder="Enter your email" required onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className='login-label'>
-              <label htmlFor="password" className="login-form-label">Password<span className="required">*</span></label>
-              <input className="login-input" type="password" placeholder="Enter your password" required onChange={(e) => setPassword(e.target.value)} />
+              <label className="login-form-label">Password<span className="required">*</span></label>
+              <input className="login-input" id='PASSWORD' name='Password' type="password" placeholder="Enter your password" required onChange={(e) => setPassword(e.target.value)} />
             </div>
             <button className="login-button" onClick={handleClick} disabled={isFetching}>LOGIN</button>
             {error && <span className="login-error">Something went wrong...</span>}
