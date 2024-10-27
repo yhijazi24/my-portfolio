@@ -37,24 +37,26 @@ const ProjectList = () => {
     const moveProject = async (index, direction) => {
         const newProjects = [...projects];
         const targetIndex = direction === 'up' ? index - 1 : index + 1;
-
-        // Check bounds
+    
         if (targetIndex >= 0 && targetIndex < newProjects.length) {
-            // Swap the projects in the frontend
-            [newProjects[index], newProjects[targetIndex]] = [newProjects[targetIndex], newProjects[index]];
-
-            // Update the order in the frontend state
-            const updatedProjects = newProjects.map((project, idx) => ({ ...project, order: idx + 1 }));
+            // Swap order values in the frontend
+            const tempOrder = newProjects[index].order;
+            newProjects[index].order = newProjects[targetIndex].order;
+            newProjects[targetIndex].order = tempOrder;
+    
+            // Sort by the new order values to maintain consistency in display
+            const updatedProjects = newProjects.sort((a, b) => a.order - b.order);
             setProjects(updatedProjects);
-
-            // Send updated order to the backend to persist the change
+    
+            // Update the order in the backend
             try {
-                await updateProjectOrder(updatedProjects);
+                await updateProjectOrder(updatedProjects); // Send sorted projects list to backend
             } catch (error) {
                 console.error("Failed to update project order in the backend:", error);
             }
         }
     };
+    
 
     const columns = [
         { field: "_id", headerName: "ID", width: 220 },
