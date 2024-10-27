@@ -15,6 +15,7 @@ const HomeHeader = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [files, setFiles] = useState([]);
   const [frenchResumeFile, setFrenchResumeFile] = useState(null);
   const [englishResumeFile, setEnglishResumeFile] = useState(null);
   const [fetchedHomeHeaderId, setFetchedHomeHeaderId] = useState(null);
@@ -24,6 +25,8 @@ const HomeHeader = () => {
       setLoading(true);
       try {
         const fetchedHomeHeader = await getHomeHeader();
+        console.log("Fetched home header:", fetchedHomeHeader);
+
         if (Array.isArray(fetchedHomeHeader) && fetchedHomeHeader.length > 0) {
           const headerData = fetchedHomeHeader[0];
           setHomeHeader(headerData);
@@ -46,45 +49,86 @@ const HomeHeader = () => {
     setUpdatedHomeHeader((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileUpload = async (file, fieldName) => {
-    if (file) {
-      const storage = getStorage(app);
-      const fileName = `${new Date().getTime()}_${file.name}`;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+  const handleFileChange = (e) => {
+    setFiles([...e.target.files]);
+  };
 
-      return new Promise((resolve, reject) => {
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(`Upload is ${progress}% done`);
-          },
-          (error) => {
-            console.error("File upload failed:", error);
-            reject(error);
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setUpdatedHomeHeader((prev) => ({ ...prev, [fieldName]: downloadURL }));
-            resolve(downloadURL);
-          }
-        );
-      });
+  const handlePdfChange = (e, field) => {
+    const file = e.target.files[0];
+    if (field === "frenchResumeFile") {
+      setFrenchResumeFile(file);
+    } else if (field === "englishResumeFile") {
+      setEnglishResumeFile(file);
     }
+  };
+
+  const handleDeleteImage = async (imageToDelete) => {
+    try {
+      const updatedImages = homeHeader.resumeImg.filter(img => img !== imageToDelete);
+      const updatedHeader = { ...updatedHomeHeader, resumeImg: updatedImages };
+      await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+      setHomeHeader(updatedHeader);
+      setUpdatedHomeHeader(updatedHeader);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to delete image:", error);
+      setError("Image deletion failed.");
+    }
+  };
+
+  const handleFileUpload = async (file) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.error("File upload failed:", error);
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        }
+      );
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (frenchResumeFile) {
-        await handleFileUpload(frenchResumeFile, "frenchResumeLink");
-      }
-      if (englishResumeFile) {
-        await handleFileUpload(englishResumeFile, "englishResumeLink");
+      let uploadedImages = [...updatedHomeHeader.resumeImg || []];
+
+      // Handle image uploads
+      if (files.length > 0) {
+        for (let file of files) {
+          const downloadURL = await handleFileUpload(file);
+          uploadedImages.push(downloadURL);
+        }
       }
 
-      await updateHomeHeader(fetchedHomeHeaderId, updatedHomeHeader, dispatch);
+      const homeHeaderToUpdate = { ...updatedHomeHeader, resumeImg: uploadedImages };
+
+      // Handle French Resume PDF upload
+      if (frenchResumeFile) {
+        const frenchResumeLink = await handleFileUpload(frenchResumeFile);
+        homeHeaderToUpdate.frenchResumeLink = frenchResumeLink;
+      }
+
+      // Handle English Resume PDF upload
+      if (englishResumeFile) {
+        const englishResumeLink = await handleFileUpload(englishResumeFile);
+        homeHeaderToUpdate.englishResumeLink = englishResumeLink;
+      }
+
+      await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
       setSuccess(true);
     } catch (updateError) {
       console.error("Update failed:", updateError);
@@ -101,6 +145,26 @@ const HomeHeader = () => {
           <h1 className="homeHeaderTitle">Edit Home Header</h1>
         </div>
         <div className="homeHeaderContainer">
+          <div className="homeHeaderShow">
+            <div className="homeHeaderShowTop">
+              {homeHeader?.resumeImg?.length > 0 ? (
+                homeHeader.resumeImg.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image || "https://via.placeholder.com/150"}
+                    alt={homeHeader?.title || "Default Title"}
+                    className="homeHeaderShowImg"
+                  />
+                ))
+              ) : (
+                <p>No images available</p>
+              )}
+              <div className="homeHeaderShowTopTitle">
+                <span className="homeHeaderShowTitle">{homeHeader?.title || "Default Title"}</span>
+                <span className="homeHeaderShowAboutMe">{homeHeader?.aboutMe || "Default About Me"}</span>
+              </div>
+            </div>
+          </div>
           <div className="homeHeaderUpdate">
             <span className="homeHeaderUpdateTitle">Edit</span>
             <form className="homeHeaderUpdateForm" onSubmit={handleSubmit}>
@@ -126,15 +190,42 @@ const HomeHeader = () => {
                   />
                 </div>
                 <div className="homeHeaderUpdateItem">
-                  <label>French Resume PDF</label>
-                  <input type="file" accept="application/pdf" onChange={(e) => setFrenchResumeFile(e.target.files[0])} />
+                  <label>French Resume File (PDF)</label>
+                  <input type="file" accept=".pdf" onChange={(e) => handlePdfChange(e, "frenchResumeFile")} />
                 </div>
                 <div className="homeHeaderUpdateItem">
-                  <label>English Resume PDF</label>
-                  <input type="file" accept="application/pdf" onChange={(e) => setEnglishResumeFile(e.target.files[0])} />
+                  <label>English Resume File (PDF)</label>
+                  <input type="file" accept=".pdf" onChange={(e) => handlePdfChange(e, "englishResumeFile")} />
                 </div>
               </div>
               <div className="homeHeaderUpdateRight">
+                <div className="homeHeaderUpdateUpload">
+                  {homeHeader?.resumeImg?.length > 0 ? (
+                    homeHeader.resumeImg.map((image, index) => (
+                      <div key={index} className="homeHeaderImageContainer">
+                        <img className="homeHeaderUpdateImg" src={image || "https://via.placeholder.com/150"} alt={`Header Image ${index + 1}`} />
+                        <div className="homeHeaderImageActions">
+                          <label htmlFor={`file-${index}`}>
+                            <Publish className="homeHeaderUpdateIcon" />
+                          </label>
+                          <input
+                            type="file"
+                            id={`file-${index}`}
+                            style={{ display: "none" }}
+                            onChange={handleFileChange}
+                          />
+                          <button type="button" onClick={() => handleDeleteImage(image)}>Delete</button>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No images available</p>
+                  )}
+                  <label htmlFor="file">
+                    <Publish className="homeHeaderUpdateIcon" />
+                  </label>
+                  <input type="file" id="file" multiple style={{ display: "none" }} onChange={handleFileChange} />
+                </div>
                 <button type="submit" className="homeHeaderUpdateButton">Update</button>
               </div>
             </form>
