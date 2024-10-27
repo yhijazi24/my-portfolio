@@ -78,11 +78,12 @@ const ProjectPage = () => {
           <p className='project-more-p'>
             {project.fullDesc.split('-').map((line, index) => (
               <span key={index}>
-                {index > 0 && '-'}{line.trim()}
-                <br />
+                {index > 0 && <br />}
+                {line.trim()}
               </span>
             ))}
           </p>
+
           <div className='project-buttons'>
             {project.webLink && (
               <a href={project.webLink} target='_blank' rel='noopener noreferrer'>
