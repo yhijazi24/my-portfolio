@@ -1,136 +1,134 @@
 .contactform-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex: 2;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex: 2 !important;
 }
 
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: fit-content;
-
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    width: fit-content !important;
 }
 
 .contact-form-title {
-    color: #1471B5;
-    font-size: 30px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    margin-top: 0;
-
+    color: #1471B5 !important;
+    font-size: 30px !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px !important;
+    margin-top: 0 !important;
 }
 
 .required {
-    color: rgb(170, 3, 3);
+    color: rgb(170, 3, 3) !important;
 }
 
 .contact-form-input {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 6px;
-    padding: 10px 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    row-gap: 6px !important;
+    padding: 10px 0 !important;
 }
 
 .contact-form-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    column-gap: 50px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    column-gap: 50px !important;
 }
 
 .contact-form-label {
-    font-size: 16px;
-    letter-spacing: 2px;
-    font-weight: 500;
-    color: #0D1B2A;
+    font-size: 16px !important;
+    letter-spacing: 2px !important;
+    font-weight: 500 !important;
+    color: #0D1B2A !important;
 }
 
 .contact-form-vrai {
-    border: 1px solid black;
-    padding: 10px 20px;
-    width: 340px;
-    max-width: 774px;
+    border: 1px solid black !important;
+    padding: 10px 20px !important;
+    width: 340px !important;
+    max-width: 774px !important;
 }
 
 input::placeholder {
-    font-size: 11px;
+    font-size: 11px !important;
 }
 
 .subject,
 .help {
-    width: 100%;
+    width: 100% !important;
 }
 
 .help {
-    height: 150px;
+    height: 150px !important;
 }
 
 .contact-form-button {
-    width: 100%;
-    background-color: #415A77;
-    color: white;
-    border: none;
-    padding: 15px;
-    font-size: 19px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    transition: all .5s ease;
+    width: 100% !important;
+    background-color: #415A77 !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px !important;
+    font-size: 19px !important;
+    font-weight: 300 !important;
+    letter-spacing: 3px !important;
+    transition: all .5s ease !important;
 }
 
 .contact-form-button:hover {
-    background-color: white;
-    color: #415A77;
-    border: 1px solid #415A77;
+    background-color: white !important;
+    color: #415A77 !important;
+    border: 1px solid #415A77 !important;
 }
 
-@media only screen and (max-width:953px) {
+@media only screen and (max-width: 953px) {
     .contact-form-vrai {
-        width: 200px;
-        max-width: 494px;
+        width: 200px !important;
+        max-width: 494px !important;
     }
 
     .subject,
     .help {
-        width: 100%;
+        width: 100% !important;
     }
     .contact-header-title {
-        font-size: 50px;
+        font-size: 50px !important;
     }
 }
 
-@media only screen and (max-width:673px) {
+@media only screen and (max-width: 673px) {
     .contact-form-group {
-        flex-direction: column;
+        flex-direction: column !important;
     }
 
     .contact-form-vrai {
-        width: 400px;
-        max-width: 400px;
+        width: 400px !important;
+        max-width: 400px !important;
     }
 
     .subject,
     .help {
-        width: 100%;
+        width: 100% !important;
     }
 }
 
-@media only screen and (max-width:520px) {
+@media only screen and (max-width: 520px) {
     .contact-form-group {
-        flex-direction: column;
+        flex-direction: column !important;
     }
 
     .contact-form-vrai {
-        width: 250px;
-        max-width: 250px;
+        width: 250px !important;
+        max-width: 250px !important;
     }
 
     .subject,
     .help {
-        width: 100%;
+        width: 100% !important;
     }
 }
