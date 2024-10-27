@@ -52,10 +52,16 @@ const Project = () => {
     // Handle form input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
+        
         if (name === 'lang') {
             setInputs((prev) => ({
                 ...prev,
                 [name]: value.split(',').map(item => item.trim()), // Convert comma-separated string to array
+            }));
+        } else if (name === 'fullDesc') {
+            setInputs((prev) => ({
+                ...prev,
+                [name]: value.startsWith('-') ? '\n' + value : value, // Add newline before hyphen if present at the start
             }));
         } else {
             setInputs((prev) => ({
@@ -64,6 +70,7 @@ const Project = () => {
             }));
         }
     };
+    
 
     // Handle image deletion
     const handleDeleteImage = (imageUrl) => {
