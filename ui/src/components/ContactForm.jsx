@@ -36,6 +36,7 @@ const ContactForm = () => {
     return (
         <div className='contactform-container'>
             <form className='contact-form' onSubmit={handleSubmit}>
+                <div className='contact-form-wrapper'>
                     <div className='contact-form-group'>
                         <div className='contact-form-input'>
                             <label htmlFor='first-name' className='contact-form-label'>First Name<span className="required">*</span></label>
@@ -71,7 +72,7 @@ const ContactForm = () => {
                         </div>
                     </div>
                     <button type="submit" className='contact-form-button'>Submit</button>
-                
+                </div>
             </form>
         </div>
     );
