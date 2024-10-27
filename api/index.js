@@ -15,10 +15,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://my-portfolio-sable-chi-29.vercel.app', // Replace '*' with the specific frontend domain if necessary
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
-}));
+app.use(cors());
 
 
 // Middleware to parse JSON
