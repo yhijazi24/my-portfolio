@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './css/footer.css';  // Adjusted to footer
-import { getFooter, updateFooter } from '../redux/apiCalls';  // Adjusted API call for Footer
+import './css/footer.css';
+import { getFooter, updateFooter } from '../redux/apiCalls';
 import { useDispatch } from 'react-redux';
 import Topbar from '../conponents/Topbar';
 import Sidebar from '../conponents/Sidebar';
@@ -17,12 +17,11 @@ const Footer = () => {
     const fetchFooter = async () => {
       setLoading(true);
       try {
-        const fetchedFooter = await getFooter(); // Fetch footer without type
+        const fetchedFooter = await getFooter(); 
         console.log("Fetched footer:", fetchedFooter);
 
-        // If fetchedFooter is an array, set the first item
-        setFooter(fetchedFooter[0]); // Update this line based on your actual data structure
-        setUpdatedFooter(fetchedFooter[0]); // Update this line based on your actual data structure
+        setFooter(fetchedFooter[0]);
+        setUpdatedFooter(fetchedFooter[0]);
       } catch (err) {
         setError("Failed to fetch footer.");
       } finally {
@@ -40,17 +39,15 @@ const Footer = () => {
     return <div className="errorMessage">{error}</div>;
   }
 
-  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUpdatedFooter((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateFooter(footer._id, updatedFooter, dispatch);  // Call API to update footer
+      await updateFooter(footer._id, updatedFooter, dispatch);
       setSuccess(true);
     } catch (updateError) {
       console.error("Update failed:", updateError);

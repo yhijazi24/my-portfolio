@@ -59,7 +59,7 @@
 .homeProjects-box {
     opacity: 1;
     perspective: 2000px;
-    top: 50%;
+    top: 55%;
     left: 50%;
     position: absolute;
     transition: transform .5s ease;
