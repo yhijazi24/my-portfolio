@@ -14,7 +14,7 @@ const Footer = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [resumeFile, setResumeFile] = useState(null); // State for selected PDF file
+  const [resumeFile, setResumeFile] = useState(null);
 
   useEffect(() => {
     const fetchFooter = async () => {
@@ -44,7 +44,6 @@ const Footer = () => {
     }
   };
 
-  // Separate function to handle file upload and return the download URL
   const uploadResumeFile = async (file) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
@@ -67,15 +66,13 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let resumeLink = updatedFooter.resumeLink; // Keep existing link if no new file is uploaded
+      let resumeLink = updatedFooter.resumeLink;
 
       if (resumeFile) {
-        // Upload the file and get the URL
         resumeLink = await uploadResumeFile(resumeFile);
-        setUpdatedFooter((prev) => ({ ...prev, resumeLink })); // Update state with new resume link
+        setUpdatedFooter((prev) => ({ ...prev, resumeLink }));
       }
 
-      // Send updated footer information to backend
       await updateFooter(footer._id, { ...updatedFooter, resumeLink }, dispatch);
       setSuccess(true);
     } catch (updateError) {

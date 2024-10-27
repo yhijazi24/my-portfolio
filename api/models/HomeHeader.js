@@ -6,6 +6,8 @@ const HomeHeaderSchema = new mongoose.Schema(
         aboutMe: { type: String, required: true },
         Resume: { type: Array, required: true },
         resumeImg: { type: Array, required: true },
+        frenchResumeLink: { type: String, required: true },
+        englishResumeLink: { type: String, required: true },
     },
     { timestamps: true }
 );

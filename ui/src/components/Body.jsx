@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import './css/body.css'; // Assuming your custom styles are here
+import './css/body.css';
 import axios from 'axios';
 
 const Body = () => {
@@ -58,25 +58,26 @@ const Body = () => {
           <SwiperSlide>
             <div className='content content3'>
               <div className='content-resume'>
-                <button className='resume-button resume1'>
+              <a href={footer.frenchResumeLink} target="_blank" rel="noopener noreferrer">
+              <button className='resume-button resume1'>
                   <img src={home.resumeImg && home.resumeImg[0]} className='resume' alt='French resume' />
                   <div className='layer'></div>
                   <p className='resume-lang'>FRENCH</p>
-                </button>
+                </button></a>
               </div>
               <div className='content-resume'>
+              <a href={footer.englishResumeLink} target="_blank" rel="noopener noreferrer">
                 <button className='resume-button resume2'>
                   <img src={home.resumeImg && home.resumeImg[1]} className='resume' alt='English resume' />
                   <div className='layer'></div>
                   <p className='resume-lang'>ENGLISH</p>
-                </button>
+                </button></a>
               </div>
             </div>
           </SwiperSlide>
         </Swiper>
       </div>
 
-      {/* Custom Pagination */}
       <div className='pagination'>
       <div className='custom-pagination'>
         {labels.map((label, index) => (
