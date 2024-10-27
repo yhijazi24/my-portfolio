@@ -3,6 +3,16 @@ const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = requir
 
 const router = require("express").Router();
 
+const initializeOrder = async () => {
+  const projects = await Project.find();
+  for (let i = 0; i < projects.length; i++) {
+      projects[i].order = i + 1; // Start orders from 1
+      await projects[i].save();
+  }
+  console.log("Order field initialized for all projects");
+};
+
+initializeOrder().catch(err => console.error(err));
 //Create
 
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
@@ -29,18 +39,21 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 router.put('/updateOrder', async (req, res) => {
   const updatedProjects = req.body;
+  console.log("Received update request:", updatedProjects);
   try {
-      // Loop through all the updated projects and save the new order
       for (let project of updatedProjects) {
           await Project.findByIdAndUpdate(project._id, { order: project.order });
       }
       res.status(200).json("Order updated successfully");
   } catch (err) {
-      res.status(500).json(err);
+      console.error("Error updating order:", err);
+      res.status(500).json({ message: "Error updating order", error: err });
   }
 });
+
 
 //Delete
 

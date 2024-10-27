@@ -9,6 +9,7 @@ const ProjectsSchema = new mongoose.Schema(
         fullDesc: { type: String, required: true },
         webLink: { type: String, required: true },
         githubLink: { type: String, required: true },
+        order: { type: Number, required: true, default: 0 } 
     },
     { timestamps: true }
 );
