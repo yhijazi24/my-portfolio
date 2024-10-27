@@ -5,8 +5,8 @@ import { getHomeHeader, updateHomeHeader } from '../redux/apiCalls';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import app from "../firebase";
 import { useDispatch } from 'react-redux';
-import Topbar from '../conponents/Topbar';
-import Sidebar from '../conponents/Sidebar';
+import Topbar from '../components/Topbar';
+import Sidebar from '../components/Sidebar';
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
@@ -15,15 +15,15 @@ const HomeHeader = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [frenchResumeFile, setFrenchResumeFile] = useState(null);
+  const [englishResumeFile, setEnglishResumeFile] = useState(null);
   const [fetchedHomeHeaderId, setFetchedHomeHeaderId] = useState(null);
-  const [files, setFiles] = useState({}); // Object to store multiple files
 
   useEffect(() => {
     const fetchHomeHeader = async () => {
       setLoading(true);
       try {
         const fetchedHomeHeader = await getHomeHeader();
-        
         if (Array.isArray(fetchedHomeHeader) && fetchedHomeHeader.length > 0) {
           const headerData = fetchedHomeHeader[0];
           setHomeHeader(headerData);
@@ -46,44 +46,45 @@ const HomeHeader = () => {
     setUpdatedHomeHeader((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e, fileKey) => {
-    setFiles((prevFiles) => ({ ...prevFiles, [fileKey]: e.target.files[0] }));
+  const handleFileUpload = async (file, fieldName) => {
+    if (file) {
+      const storage = getStorage(app);
+      const fileName = `${new Date().getTime()}_${file.name}`;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      return new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(`Upload is ${progress}% done`);
+          },
+          (error) => {
+            console.error("File upload failed:", error);
+            reject(error);
+          },
+          async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            setUpdatedHomeHeader((prev) => ({ ...prev, [fieldName]: downloadURL }));
+            resolve(downloadURL);
+          }
+        );
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const storage = getStorage(app);
-    const fileLinks = {};
-
     try {
-      for (const key of ['resumeImg', 'frenchResumeLink', 'englishResumeLink']) {
-        if (files[key]) {
-          const file = files[key];
-          const fileName = new Date().getTime() + file.name;
-          const storageRef = ref(storage, fileName);
-          const uploadTask = uploadBytesResumable(storageRef, file);
-
-          const downloadURL = await new Promise((resolve, reject) => {
-            uploadTask.on(
-              "state_changed",
-              null,
-              reject,
-              async () => {
-                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                resolve(downloadURL);
-              }
-            );
-          });
-          fileLinks[key] = downloadURL;
-        }
+      if (frenchResumeFile) {
+        await handleFileUpload(frenchResumeFile, "frenchResumeLink");
+      }
+      if (englishResumeFile) {
+        await handleFileUpload(englishResumeFile, "englishResumeLink");
       }
 
-      const homeHeaderToUpdate = { 
-        ...updatedHomeHeader, 
-        ...fileLinks 
-      };
-
-      await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
+      await updateHomeHeader(fetchedHomeHeaderId, updatedHomeHeader, dispatch);
       setSuccess(true);
     } catch (updateError) {
       console.error("Update failed:", updateError);
@@ -96,46 +97,50 @@ const HomeHeader = () => {
       <Topbar />
       <Sidebar />
       <div className="homeHeader">
-        <h1 className="homeHeaderTitle">Edit Home Header</h1>
+        <div className="homeHeaderTitleContainer">
+          <h1 className="homeHeaderTitle">Edit Home Header</h1>
+        </div>
         <div className="homeHeaderContainer">
-          {error && <p className="errorMessage">{error}</p>}
-          {success && <p className="successMessage">Header updated successfully!</p>}
-          <form className="homeHeaderUpdateForm" onSubmit={handleSubmit}>
-            <div className="homeHeaderUpdateLeft">
-              <label>About Me</label>
-              <input
-                type="text"
-                name="aboutMe"
-                value={updatedHomeHeader.aboutMe || ''}
-                onChange={handleInputChange}
-                className="homeHeaderUpdateInput"
-              />
-              <label>Title</label>
-              <input
-                type="text"
-                name="title"
-                value={updatedHomeHeader.title || ''}
-                onChange={handleInputChange}
-                className="homeHeaderUpdateInput"
-              />
-              <label>Resume (Primary)</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, 'resumeImg')}
-              />
-              <label>French Resume</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, 'frenchResumeLink')}
-              />
-              <label>English Resume</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, 'englishResumeLink')}
-              />
-            </div>
-            <button type="submit" className="homeHeaderUpdateButton">Update</button>
-          </form>
+          <div className="homeHeaderUpdate">
+            <span className="homeHeaderUpdateTitle">Edit</span>
+            <form className="homeHeaderUpdateForm" onSubmit={handleSubmit}>
+              <div className="homeHeaderUpdateLeft">
+                <div className="homeHeaderUpdateItem">
+                  <label>About Me</label>
+                  <input
+                    type="text"
+                    name="aboutMe"
+                    value={updatedHomeHeader.aboutMe || ''}
+                    onChange={handleInputChange}
+                    className="homeHeaderUpdateInput"
+                  />
+                </div>
+                <div className="homeHeaderUpdateItem">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={updatedHomeHeader.title || ''}
+                    onChange={handleInputChange}
+                    className="homeHeaderUpdateInput"
+                  />
+                </div>
+                <div className="homeHeaderUpdateItem">
+                  <label>French Resume PDF</label>
+                  <input type="file" accept="application/pdf" onChange={(e) => setFrenchResumeFile(e.target.files[0])} />
+                </div>
+                <div className="homeHeaderUpdateItem">
+                  <label>English Resume PDF</label>
+                  <input type="file" accept="application/pdf" onChange={(e) => setEnglishResumeFile(e.target.files[0])} />
+                </div>
+              </div>
+              <div className="homeHeaderUpdateRight">
+                <button type="submit" className="homeHeaderUpdateButton">Update</button>
+              </div>
+            </form>
+            {success && <p className="successMessage">Header updated successfully!</p>}
+            {error && <p className="errorMessage">{error}</p>}
+          </div>
         </div>
       </div>
     </>
