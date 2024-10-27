@@ -159,14 +159,14 @@ const Project = () => {
                             onChange={handleChange}
                         />
                         <label>Project Description</label>
-                        <input
+                        <textarea
                             type="text"
                             name="desc"
                             value={inputs.desc}
                             onChange={handleChange}
                         />
                         <label>Full Description</label>
-                        <input
+                        <textarea
                             type="text"
                             name="fullDesc"
                             value={inputs.fullDesc}

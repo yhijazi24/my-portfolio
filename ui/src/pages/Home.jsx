@@ -16,7 +16,6 @@ const Home = () => {
       <HomeProjects />
       <Name />
       <Footer />
-      <Link to={'/admin'}>ADMIN</Link>
     </div>
   )
 }
