@@ -123,13 +123,15 @@ const ProjectList = () => {
             <Sidebar />
             <div className="projectList">
                 <DataGrid
+                    key={projects.map(p => p._id).join(',')}
                     rows={projects}
                     disableSelectionOnClick
                     columns={columns}
                     getRowId={(row) => row._id}
                     pageSize={8}
-                    rowHeight={100} // Adjust based on your needs
+                    rowHeight={100}
                 />
+
             </div>
         </>
     );

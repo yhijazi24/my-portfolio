@@ -45,7 +45,7 @@ router.put('/updateOrder', async (req, res) => {
 //Delete
 
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
-    try {
+    try { 
         await Project.findByIdAndDelete(req.params.id)
         res.status(200).json("Project has been deleted...")
     } catch (err) {
