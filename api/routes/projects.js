@@ -44,13 +44,15 @@ router.put('/updateOrder', async (req, res) => {
   const updatedProjects = req.body;
   console.log("Received update request:", updatedProjects);
   try {
-      for (let project of updatedProjects) {
-          await Project.findByIdAndUpdate(project._id, { order: project.order });
-      }
+    for (let project of updatedProjects) {
+      console.log("Updating project ID:", project._id, "with order:", project.order);
+      await Project.findByIdAndUpdate(project._id, { order: project.order });
+  }
+  
       res.status(200).json("Order updated successfully");
   } catch (err) {
-      console.error("Error updating order:", err);
-      res.status(500).json({ message: "Error updating order", error: err });
+      console.error("Error updating order:", err.message);
+      res.status(500).json({ message: "Error updating order", error: err.message });
   }
 });
 
