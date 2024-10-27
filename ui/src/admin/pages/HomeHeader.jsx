@@ -5,8 +5,8 @@ import { getHomeHeader, updateHomeHeader } from '../redux/apiCalls';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import app from "../firebase";
 import { useDispatch } from 'react-redux';
-import Topbar from '../components/Topbar';
-import Sidebar from '../components/Sidebar';
+import Topbar from '../conponents/Topbar';
+import Sidebar from '../conponents/Sidebar';
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
