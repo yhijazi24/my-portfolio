@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ProjectPage = () => {
-  const { projectId } = useParams(); 
+  const { projectId } = useParams();
   const [project, setProject] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const title = location.pathname.split("/")[2];
@@ -16,7 +16,7 @@ const ProjectPage = () => {
         const res = await axios.get(`https://my-portfolio0-drab.vercel.app/projects/find/${title}`);
         setProject(res.data);
         if (res.data.img && res.data.img.length > 0) {
-          setMainImage(res.data.img[0]); 
+          setMainImage(res.data.img[0]);
         }
       } catch (err) {
         console.error(err);
@@ -37,7 +37,7 @@ const ProjectPage = () => {
     <div className='project-container'>
       <div className='project-wrapper'>
         <div className='project-header'>
-          <h1 className='project-title'>{project.title}</h1> 
+          <h1 className='project-title'>{project.title}</h1>
           <Link to={'/projects'}>
             <Close className='project-close' />
           </Link>
@@ -75,7 +75,14 @@ const ProjectPage = () => {
           )}
         </div>
         <div className='project-more-desc'>
-          <p className='project-more-p'>{project.fullDesc}</p>
+          <p className='project-more-p'>
+            {project.fullDesc.split('-').map((line, index) => (
+              <span key={index}>
+                {index > 0 && '-'}{line.trim()}
+                <br />
+              </span>
+            ))}
+          </p>
           <div className='project-buttons'>
             {project.webLink && (
               <a href={project.webLink} target='_blank' rel='noopener noreferrer'>
