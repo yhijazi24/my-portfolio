@@ -58,7 +58,7 @@ const Body = () => {
           <SwiperSlide>
             <div className='content content3'>
               <div className='content-resume'>
-              <a href={footer.frenchResumeLink} target="_blank" rel="noopener noreferrer">
+              <a href={home.frenchResumeLink} target="_blank" rel="noopener noreferrer">
               <button className='resume-button resume1'>
                   <img src={home.resumeImg && home.resumeImg[0]} className='resume' alt='French resume' />
                   <div className='layer'></div>
@@ -66,7 +66,7 @@ const Body = () => {
                 </button></a>
               </div>
               <div className='content-resume'>
-              <a href={footer.englishResumeLink} target="_blank" rel="noopener noreferrer">
+              <a href={home.englishResumeLink} target="_blank" rel="noopener noreferrer">
                 <button className='resume-button resume2'>
                   <img src={home.resumeImg && home.resumeImg[1]} className='resume' alt='English resume' />
                   <div className='layer'></div>
