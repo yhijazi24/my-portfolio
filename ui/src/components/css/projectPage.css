@@ -19,6 +19,12 @@
     font-size: 60px !important;
     cursor: pointer;
     color: #1B263B;
+    scale: 1;
+    transition: scale .8s ease;
+}
+
+.project-close:hover{
+    scale: 1.1;
 }
 
 .project-desc {

@@ -9,6 +9,7 @@ const ProjectPage = () => {
   const [project, setProject] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const title = location.pathname.split("/")[2];
+
   useEffect(() => {
     const getProject = async () => {
       try {
@@ -81,7 +82,7 @@ const ProjectPage = () => {
                 <button className='project-button'>Visit Website</button>
               </a>
             )}
-            {project.github && (
+            {project.githubLink && (
               <a href={project.githubLink} target='_blank' rel='noopener noreferrer'>
                 <button className='project-button'>Visit Github Repository</button>
               </a>

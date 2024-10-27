@@ -10,7 +10,7 @@ const ProjectsList = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 6;
+  const projectsPerPage = 9;
   const [filters, setFilters] = useState([]); 
   const [type, setType] = useState(null); 
 
