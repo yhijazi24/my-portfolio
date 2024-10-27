@@ -14,7 +14,7 @@ const Footer = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [resumeFile, setResumeFile] = useState(null); // New state for resume file
+  const [resumeFile, setResumeFile] = useState(null); // State for selected PDF file
 
   useEffect(() => {
     const fetchFooter = async () => {
@@ -34,18 +34,9 @@ const Footer = () => {
     fetchFooter();
   }, []);
 
-  if (loading) {
-    return <div>Loading footer data...</div>;
-  }
-
-  if (error) {
-    return <div className="errorMessage">{error}</div>;
-  }
-
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
 
-    // Handle PDF file selection
     if (name === 'resumeFile' && files && files[0]) {
       setResumeFile(files[0]);
     } else {
@@ -53,38 +44,53 @@ const Footer = () => {
     }
   };
 
+  // Separate function to handle file upload and return the download URL
+  const uploadResumeFile = async (file) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        null,
+        reject,
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        }
+      );
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const storage = getStorage(app);
     try {
+      let resumeLink = updatedFooter.resumeLink; // Keep existing link if no new file is uploaded
+
       if (resumeFile) {
-        const fileName = new Date().getTime() + resumeFile.name;
-        const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, resumeFile);
-
-        // Wait for file upload and get the download URL
-        const resumeLink = await new Promise((resolve, reject) => {
-          uploadTask.on(
-            "state_changed",
-            null,
-            reject,
-            async () => {
-              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-              resolve(downloadURL);
-            }
-          );
-        });
-
-        setUpdatedFooter((prev) => ({ ...prev, resumeLink }));
+        // Upload the file and get the URL
+        resumeLink = await uploadResumeFile(resumeFile);
+        setUpdatedFooter((prev) => ({ ...prev, resumeLink })); // Update state with new resume link
       }
 
-      await updateFooter(footer._id, updatedFooter, dispatch);
+      // Send updated footer information to backend
+      await updateFooter(footer._id, { ...updatedFooter, resumeLink }, dispatch);
       setSuccess(true);
     } catch (updateError) {
       console.error("Update failed:", updateError);
       setError("Footer update failed.");
     }
   };
+
+  if (loading) {
+    return <div>Loading footer data...</div>;
+  }
+
+  if (error) {
+    return <div className="errorMessage">{error}</div>;
+  }
 
   return (
     <>
