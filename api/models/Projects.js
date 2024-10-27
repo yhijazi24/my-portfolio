@@ -7,8 +7,8 @@ const ProjectsSchema = new mongoose.Schema(
         lang: { type: Array, required: true},
         desc: { type: String, required: true },
         fullDesc: { type: String, required: true },
-        webLink: { type: String, required: true },
-        githubLink: { type: String, required: true },
+        webLink: { type: String},
+        githubLink: { type: String},
         order: { type: Number, required: true, default: 0 } 
     },
     { timestamps: true }
