@@ -116,6 +116,7 @@
     text-align: justify;
     padding: 40px;
     padding-top: 0;
+    line-height: 2rem;
 }
 
 .project-button {
