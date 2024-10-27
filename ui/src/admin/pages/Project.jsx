@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Publish } from '@mui/icons-material';
 import { updateProject, getProject } from "../redux/apiCalls";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase"; // Import Firebase storage
+import { storage } from "../firebase";
 import Topbar from '../conponents/Topbar';
 import Sidebar from '../conponents/Sidebar';
 
@@ -13,7 +13,7 @@ const Project = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const projectId = location.pathname.split("/")[3];
-    const [file, setFile] = useState(null); // For handling file uploads
+    const [file, setFile] = useState(null);
     const [inputs, setInputs] = useState({
         title: '',
         desc: '',
@@ -21,7 +21,7 @@ const Project = () => {
         lang: '',
         webLink: '',
         githubLink: '',
-        img: [] // Include img for handling images
+        img: [] 
     });
 
     useEffect(() => {
@@ -29,16 +29,16 @@ const Project = () => {
             if (projectId) {
                 try {
                     console.log("Fetching project with ID:", projectId);
-                    const projectData = await getProject(projectId); // Fetch the project by ID
+                    const projectData = await getProject(projectId);
                     console.log("Fetched project data:", projectData);
                     setInputs({
                         title: projectData.title,
                         desc: projectData.desc,
                         fullDesc: projectData.fullDesc,
-                        lang: projectData.lang.join(', '), // Convert array to comma-separated string
+                        lang: projectData.lang.join(', '), 
                         webLink: projectData.webLink,
                         githubLink: projectData.githubLink,
-                        img: projectData.img || [] // Handle image array
+                        img: projectData.img || [] 
                     });
                 } catch (error) {
                     console.error("Failed to fetch project:", error);
@@ -47,21 +47,20 @@ const Project = () => {
         };
 
         fetchProject();
-    }, [projectId]); // Re-fetch if projectId changes
+    }, [projectId]); 
 
-    // Handle form input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         
         if (name === 'lang') {
             setInputs((prev) => ({
                 ...prev,
-                [name]: value.split(',').map(item => item.trim()), // Convert comma-separated string to array
+                [name]: value.split(',').map(item => item.trim()), 
             }));
         } else if (name === 'fullDesc') {
             setInputs((prev) => ({
                 ...prev,
-                [name]: value.startsWith('-') ? '\n' + value : value, // Add newline before hyphen if present at the start
+                [name]: value.startsWith('-') ? '\n' + value : value,
             }));
         } else {
             setInputs((prev) => ({
@@ -71,46 +70,38 @@ const Project = () => {
         }
     };
     
-
-    // Handle image deletion
     const handleDeleteImage = (imageUrl) => {
         setInputs((prev) => ({
             ...prev,
-            img: prev.img.filter((img) => img !== imageUrl) // Remove the selected image from array
+            img: prev.img.filter((img) => img !== imageUrl)
         }));
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (file) {
-            const fileName = new Date().getTime() + file.name; // Create a unique filename
+            const fileName = new Date().getTime() + file.name;
             const storageRef = ref(storage, `projects/${fileName}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
 
-            // Track upload progress
             uploadTask.on(
                 "state_changed",
                 (snapshot) => {
-                    // Optional: Track progress
                 },
                 (error) => {
                     console.error("Upload failed:", error);
                 },
                 async () => {
-                    // On successful upload, get the download URL
                     const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                     setInputs((prev) => ({
                         ...prev,
-                        img: [...prev.img, downloadURL] // Add the new image URL to the array
+                        img: [...prev.img, downloadURL]
                     }));
-                    // Now update the project in the database
                     updateProject(projectId, { ...inputs, img: [...inputs.img, downloadURL] }, dispatch);
                 }
             );
         } else {
-            // If no file is selected, just update the other inputs
             updateProject(projectId, inputs, dispatch);
         }
     };

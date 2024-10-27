@@ -1,24 +1,5 @@
 import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux"
 import { publicRequest, userRequest } from "../../requestMethods";
-import {
-  getProjectStart,
-  getProjectSuccess,
-  getProjectFailure,
-  deleteProjectStart,
-  deleteProjectSuccess,
-  deleteProjectFailure,
-  updateProjectStart,
-  updateProjectSuccess,
-  updateProjectFailure,
-  addProjectStart,
-  addProjectSuccess,
-  addProjectFailure
-} from "./projectRedux";
-
-
-// redux/apiCalls.js
-import { setHomeProjects } from './homeProjectsSlice';
-
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -46,11 +27,11 @@ export const logoutUser = async (dispatch) => {
 export const getProject = async (id) => {
   try {
       const response = await publicRequest.get(`/projects/${id}`);
-      console.log('Project data:', response.data); // Log the response data
+      console.log('Project data:', response.data); 
       return response.data;
   } catch (error) {
       console.error('Error fetching project:', error);
-      throw error; // Rethrow the error to handle it in the component
+      throw error; 
   }
 };
 
@@ -96,10 +77,10 @@ export const updateProjectOrder = async (projects) => {
 
 export const addProject = async (project) => {
   try {
-    console.log('Project Payload:', project); // Log the project data to check its structure
+    console.log('Project Payload:', project);
     
     const res = await userRequest.post(`/projects/`, project);
-    console.log('Server Response:', res.data); // Log the server response
+    console.log('Server Response:', res.data); 
     
     return res.data;
   } catch (err) {
@@ -140,24 +121,23 @@ export const updateHomeHeader = async (headerId, updatedHeader) => {
 };
 
 
-// apiCalls.js
 export const getHomeProjects = async () => {
   try {
     const res = await userRequest.get(`/homeProject/`);
-    return res.data; // Return the data directly
+    return res.data; 
   } catch (err) {
     console.error("Error fetching home projects:", err);
-    throw err; // Throw an error to be handled in the component
+    throw err;
   }
 };
-// apiCalls.js
+
 export const updateHomeProject = async (homeProjectId, updatedHomeProject) => {
   try {
     const res = await userRequest.put(`/homeProject/${homeProjectId}`, updatedHomeProject);
-    return res.data; // Return the updated project data
+    return res.data; 
   } catch (err) {
     console.error("Error updating home project:", err);
-    throw err; // Throw an error to be handled in the component
+    throw err;
   }
 };
 

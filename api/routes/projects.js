@@ -6,7 +6,7 @@ const router = require("express").Router();
 const initializeOrder = async () => {
   const projects = await Project.find();
   for (let i = 0; i < projects.length; i++) {
-      projects[i].order = i + 1; // Start orders from 1
+      projects[i].order = i + 1; 
       await projects[i].save();
   }
   console.log("Order field initialized for all projects");

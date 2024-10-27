@@ -42,7 +42,7 @@ const ProjectsList = () => {
     if (filters.length > 0) {
       setFilteredProjects(
         projects.filter((project) =>
-          filters.some((filter) => project.lang.includes(filter)) // <-- Change here
+          filters.some((filter) => project.lang.includes(filter))
         )
       );
     } else {

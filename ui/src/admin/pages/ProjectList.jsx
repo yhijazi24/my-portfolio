@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './css/projectList.css';
 import { Link } from "react-router-dom";
-import { deleteProject, getAllProjects, updateProjectOrder } from "../redux/apiCalls"; // Include API call for updating order
+import { deleteProject, getAllProjects, updateProjectOrder } from "../redux/apiCalls";
 import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import Topbar from '../conponents/Topbar';
@@ -15,7 +15,6 @@ const ProjectList = () => {
             try {
                 const data = await getAllProjects();
                 console.log("Fetched Projects:", data);
-                // Sort projects based on their "order" field
                 const sortedProjects = data.sort((a, b) => a.order - b.order);
                 setProjects(sortedProjects);
             } catch (error) {
@@ -39,18 +38,15 @@ const ProjectList = () => {
         const targetIndex = direction === 'up' ? index - 1 : index + 1;
     
         if (targetIndex >= 0 && targetIndex < newProjects.length) {
-            // Swap order values in the frontend
             const tempOrder = newProjects[index].order;
             newProjects[index].order = newProjects[targetIndex].order;
             newProjects[targetIndex].order = tempOrder;
     
-            // Sort by the new order values to maintain consistency in display
             const updatedProjects = newProjects.sort((a, b) => a.order - b.order);
             setProjects(updatedProjects);
     
-            // Update the order in the backend
             try {
-                await updateProjectOrder(updatedProjects); // Send sorted projects list to backend
+                await updateProjectOrder(updatedProjects);
             } catch (error) {
                 console.error("Failed to update project order in the backend:", error);
             }
@@ -95,14 +91,14 @@ const ProjectList = () => {
                         <button
                             className="moveButton"
                             onClick={() => moveProject(index, 'up')}
-                            disabled={index === 0} // Disable if it's already the first item
+                            disabled={index === 0}
                         >
                             Move Up
                         </button>
                         <button
                             className="moveButton"
                             onClick={() => moveProject(index, 'down')}
-                            disabled={index === projects.length - 1} // Disable if it's already the last item
+                            disabled={index === projects.length - 1}
                         >
                             Move Down
                         </button>
