@@ -11,7 +11,7 @@ const HomeHeader = sequelize.define('HomeHeader', {
     allowNull: false,
   },
   resumeImg: {
-    type: DataTypes.TEXT, // We will store JSON stringified array
+    type: DataTypes.TEXT, 
     allowNull: false,
     get() {
       const raw = this.getDataValue('resumeImg');
