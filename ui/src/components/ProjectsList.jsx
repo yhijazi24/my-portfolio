@@ -23,7 +23,7 @@ const ProjectsList = () => {
   useEffect(() => {
     const getProjects = async () => {
       try {
-        const res = await axios.get(`https://my-portfolio0-drab.vercel.app/projects/`);
+        const res = await axios.get(`https://portfolio-backend-upzy.onrender.com/projects/`);
         setProjects(res.data);
       } catch (err) {
         console.error(err);

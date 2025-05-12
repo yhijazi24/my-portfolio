@@ -13,7 +13,7 @@ const ProjectPage = () => {
   useEffect(() => {
     const getProject = async () => {
       try {
-        const res = await axios.get(`https://my-portfolio0-drab.vercel.app/projects/find/${title}`);
+        const res = await axios.get(`https://portfolio-backend-upzy.onrender.com/projects/find/${title}`);
         setProject(res.data);
         if (res.data.img && res.data.img.length > 0) {
           setMainImage(res.data.img[0]);

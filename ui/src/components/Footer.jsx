@@ -14,7 +14,7 @@ const Footer = () => {
   useEffect(() => {
     const getFooter = async () => {
       try {
-        const res = await axios.get(`https://my-portfolio0-drab.vercel.app/footer/`);
+        const res = await axios.get(`https://portfolio-backend-upzy.onrender.com/footer/`);
         console.log('Fetched Footer Data:', res.data);
         setFooter(res.data[0]);
       } catch (err) {

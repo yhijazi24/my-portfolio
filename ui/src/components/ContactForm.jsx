@@ -21,7 +21,7 @@ const ContactForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://my-portfolio0-drab.vercel.app/contact', formData, {
+            const response = await axios.post('https://portfolio-backend-upzy.onrender.com/contact', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
