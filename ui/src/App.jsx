@@ -14,10 +14,12 @@ import HomeProjects from './admin/pages/HomeProjects';
 import Footer from './admin/pages/Footer';
 import ContactAdmin from './admin/pages/Contact';
 import ScrollToTop from './ScrollToTop';
+import Maintenance from './pages/Maintenance';
 import './App.css';
 
 function App() {
   const [admin, setAdmin] = useState(null);
+  const isMaintenance = true; // Toggle this manually or fetch it from backend
 
   useEffect(() => {
     const storedData = localStorage.getItem("persist:root");
@@ -27,6 +29,10 @@ function App() {
       setAdmin(isAdmin);
     }
   }, []);
+
+  if (isMaintenance) {
+    return <Maintenance />;
+  }
 
   if (admin === null) {
     return <div>Loading...</div>;

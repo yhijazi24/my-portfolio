@@ -11,8 +11,8 @@ const HomeHeader = sequelize.define('HomeHeader', {
     allowNull: false,
   },
   resumeImg: {
-    type: DataTypes.TEXT,
-    allowNull: true,  // allow it to be null initially
+    type: DataTypes.TEXT, 
+    allowNull: false,
     get() {
       const raw = this.getDataValue('resumeImg');
       return raw ? JSON.parse(raw) : [];
@@ -23,11 +23,11 @@ const HomeHeader = sequelize.define('HomeHeader', {
   },
   frenchResumeLink: {
     type: DataTypes.STRING,
-    allowNull: true,  // allow null if not set yet
+    allowNull: false,
   },
   englishResumeLink: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
 }, {
   timestamps: true,
