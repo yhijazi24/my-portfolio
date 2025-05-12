@@ -3,8 +3,8 @@ import './css/topbar.css';
 import { Language, NotificationsNone, Settings } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../redux/apiCalls'; // Assuming the logoutUser function is in apiCalls.js
-import { persistor } from '../redux/store'; // Access the persistor to clear persisted state
+import { logoutUser } from '../redux/apiCalls'; 
+import { persistor } from '../redux/store';
 
 const Topbar = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,9 @@ const Topbar = () => {
     e.preventDefault();
     const confirmed = window.confirm('Are you sure you want to log out?');
     if (confirmed) {
-      logoutUser(dispatch);  // Dispatches the logout action to update Redux state
-      persistor.purge();     // Clears persisted user data in localStorage
-      navigate('/login');    // Redirects to the login page
+      logoutUser(dispatch); 
+      persistor.purge();   
+      navigate('/login');   
     }
   };
 
@@ -24,7 +24,7 @@ const Topbar = () => {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">Mustad Maroc</span>
+          <span className="logo">My portfolio Admin Panel</span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">

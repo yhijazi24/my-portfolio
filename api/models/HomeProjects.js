@@ -1,12 +1,28 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
 
-const HomeProjectSchema = new mongoose.Schema(
-    {
-        title: { type: String, required: true},
-        subTitle: { type: String, required: true},
-        img: { type: Array, required: true },
+const HomeProjects = sequelize.define('HomeProject', {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  subTitle: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  img: {
+    type: DataTypes.TEXT, // Store JSON array
+    allowNull: false,
+    get() {
+      const raw = this.getDataValue('img');
+      return raw ? JSON.parse(raw) : [];
     },
-    { timestamps: true }
-);
+    set(value) {
+      this.setDataValue('img', JSON.stringify(value));
+    },
+  },
+}, {
+  timestamps: true,
+});
 
-module.exports = mongoose.model('HomeProjects', HomeProjectSchema);
+module.exports = HomeProjects;

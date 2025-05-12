@@ -1,41 +1,36 @@
-const Home = require("../models/HomeProjects");
+const router = require("express").Router();
+const HomeProject = require("../models/HomeProjects");
 const { verifyTokenAndAdmin } = require("./verifyToken");
 
-const router = require("express").Router();
-
-//Create
+// Create
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
-    const newHome = new Home(req.body);
-
-    try {
-        const savedHome = await newHome.save();
-        res.status(200).json(savedHome);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  try {
+    const home = await HomeProject.create(req.body);
+    res.status(200).json(home);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// Update Header
+// Update
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-    try {
-        const updatedHome = await Home.findByIdAndUpdate(req.params.id, {
-            $set: req.body,
-        }, { new: true });
-        res.status(200).json(updatedHome);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  try {
+    await HomeProject.update(req.body, { where: { id: req.params.id } });
+    const updated = await HomeProject.findByPk(req.params.id);
+    res.status(200).json(updated);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-//GET ALL
-
-router.get("/", async (req, res) => { 
-    try {
-        const homes = await Home.find(); 
-        res.status(200).json(homes);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+// Get all
+router.get("/", async (req, res) => {
+  try {
+    const homes = await HomeProject.findAll();
+    res.status(200).json(homes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

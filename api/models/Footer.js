@@ -1,13 +1,27 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
 
-const FooterSchema = new mongoose.Schema(
-    {
-        creator: { type: String, required: true, unique: true },
-        resumeLink: { type: String, required: true, unique: true },
-        githubLink: { type: String, required: true },
-        linkdinLink: { type: String, required: true },
-    },
-    { timestamps: true }
-);
+const Footer = sequelize.define('Footer', {
+  creator: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  resumeLink: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  githubLink: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  linkdinLink: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  timestamps: true,
+});
 
-module.exports = mongoose.model('Footer', FooterSchema);
+module.exports = Footer;

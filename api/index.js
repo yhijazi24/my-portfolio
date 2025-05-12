@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require('cors');
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require('path');  // Make sure to require 'path'
+
+const sequelize = require('./db');
 
 const authRoute = require("./routes/auth");
 const projectRoute = require("./routes/projects");
@@ -18,15 +19,20 @@ const app = express();
 app.use(cors());
 
 
+
+
 // Middleware to parse JSON
 app.use(express.json(
   
 ));
 
 // Database connection
-mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log("DB Connection Successful"))
-  .catch((err) => console.error("DB Connection Error:", err));
+
+  sequelize.sync().then(() => {
+    console.log("SQLite DB synced.");
+  }).catch((err) => {
+    console.error("Error syncing DB:", err);
+  });
 
 // Routes for API
 app.use("/auth", authRoute);

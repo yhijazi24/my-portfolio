@@ -1,15 +1,36 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
 
-const HomeHeaderSchema = new mongoose.Schema(
-    {
-        title: { type: String, required: true },
-        aboutMe: { type: String, required: true },
-        Resume: { type: Array, required: true },
-        resumeImg: { type: Array, required: true },
-        frenchResumeLink: { type: String, required: true },
-        englishResumeLink: { type: String, required: true },
+const HomeHeader = sequelize.define('HomeHeader', {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  aboutMe: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  resumeImg: {
+    type: DataTypes.TEXT, // We will store JSON stringified array
+    allowNull: false,
+    get() {
+      const raw = this.getDataValue('resumeImg');
+      return raw ? JSON.parse(raw) : [];
     },
-    { timestamps: true }
-);
+    set(value) {
+      this.setDataValue('resumeImg', JSON.stringify(value));
+    },
+  },
+  frenchResumeLink: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  englishResumeLink: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  timestamps: true,
+});
 
-module.exports = mongoose.model('HomeHeader', HomeHeaderSchema);
+module.exports = HomeHeader;

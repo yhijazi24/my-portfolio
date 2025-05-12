@@ -1,41 +1,42 @@
-const Header = require("../models/HomeHeader");
-const { verifyTokenAndAdmin } = require("./verifyToken");
+const express = require('express');
+const router = express.Router();
+const HomeHeader = require('../models/HomeHeader');
 
-const router = require("express").Router();
-
-//Create
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
-    const newHeader = new Header(req.body);
-
-    try {
-        const savedHeader = await newHeader.save();
-        res.status(200).json(savedHeader);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+// GET all
+router.get('/', async (req, res) => {
+  try {
+    const headers = await HomeHeader.findAll();
+    res.status(200).json(headers);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Update Header
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-    try {
-        const updatedHeader = await Header.findByIdAndUpdate(req.params.id, {
-            $set: req.body,
-        }, { new: true });
-        res.status(200).json(updatedHeader);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+// CREATE
+router.post('/', async (req, res) => {
+  try {
+    const header = await HomeHeader.create(req.body);
+    res.status(201).json(header);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-//GET ALL
-
-router.get("/", async (req, res) => {  // New route for getting all headers
-    try {
-        const headers = await Header.find(); // Fetch all headers from the database
-        res.status(200).json(headers);
-    } catch (err) {
-        res.status(500).json(err);
+// UPDATE
+router.put('/:id', async (req, res) => {
+  try {
+    const [rowsUpdated] = await HomeHeader.update(req.body, {
+      where: { id: req.params.id },
+    });
+    if (rowsUpdated > 0) {
+      const updated = await HomeHeader.findByPk(req.params.id);
+      res.status(200).json(updated);
+    } else {
+      res.status(404).json({ error: 'Not found' });
     }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
