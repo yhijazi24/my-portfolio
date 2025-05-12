@@ -7,7 +7,7 @@ import './css/body.css';
 import axios from 'axios';
 
 const Body = () => {
-  const [home, setHome] = useState(null); // start with null to detect loading
+  const [home, setHome] = useState(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const labels = ['HOME', 'ABOUT ME', 'RESUME'];
@@ -34,7 +34,7 @@ const Body = () => {
     }
   };
 
-  if (!home) return <div className="loading">Loading...</div>; // wait for data
+  if (!home) return <div className="loading">Loading...</div>;
 
   return (
     <div className='body-container'>
@@ -49,18 +49,18 @@ const Body = () => {
         >
           <SwiperSlide>
             <div className='content'>
-              <h1 className='content-title'>{home?.title}</h1>
+              <h1 className='content-title'>{home?.title || 'No Title Provided'}</h1>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className='content'>
-              <p className='content-info'>{home?.aboutMe}</p>
+              <p className='content-info'>{home?.aboutMe || 'No About Me text available.'}</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className='content content3'>
               <div className='content-resume'>
-                {home?.frenchResumeLink && home?.resumeImg?.[0] && (
+                {home?.frenchResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[0] && (
                   <a href={home.frenchResumeLink} target="_blank" rel="noopener noreferrer">
                     <button className='resume-button resume1'>
                       <img src={home.resumeImg[0]} className='resume' alt='French resume' />
@@ -71,7 +71,7 @@ const Body = () => {
                 )}
               </div>
               <div className='content-resume'>
-                {home?.englishResumeLink && home?.resumeImg?.[1] && (
+                {home?.englishResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[1] && (
                   <a href={home.englishResumeLink} target="_blank" rel="noopener noreferrer">
                     <button className='resume-button resume2'>
                       <img src={home.resumeImg[1]} className='resume' alt='English resume' />
