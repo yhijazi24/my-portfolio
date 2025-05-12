@@ -27,12 +27,10 @@ app.use(express.json(
 ));
 
 // Database connection
+sequelize.sync({ alter: true })
+  .then(() => console.log("PostgreSQL DB synced"))
+  .catch((err) => console.error("DB sync error:", err));
 
-  sequelize.sync().then(() => {
-    console.log("SQLite DB synced.");
-  }).catch((err) => {
-    console.error("Error syncing DB:", err);
-  });
 
 // Routes for API
 app.use("/auth", authRoute);

@@ -19,6 +19,7 @@ router.post("/register", async (req, res) => {
 
     res.status(201).json(newUser);
   } catch (err) {
+    console.log("Registartion error: ", err);
     res.status(500).json({ message: "Internal server error" });
   }
 });
