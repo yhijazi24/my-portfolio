@@ -3,14 +3,27 @@ const router = express.Router();
 const HomeHeader = require('../models/HomeHeader');
 
 // GET all
+// GET all
 router.get('/', async (req, res) => {
-  try {
-    const headers = await HomeHeader.findAll();
-    res.status(200).json(headers);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+    try {
+      const headers = await HomeHeader.findAll();
+  
+      const parsedHeaders = headers.map(header => {
+        const data = header.toJSON();
+        try {
+          data.resumeImg = data.resumeImg ? JSON.parse(data.resumeImg) : [];
+        } catch (err) {
+          data.resumeImg = [];
+        }
+        return data;
+      });
+  
+      res.status(200).json(parsedHeaders);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
 
 // CREATE
 router.post('/', async (req, res) => {
