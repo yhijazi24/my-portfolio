@@ -31,7 +31,7 @@ const HomeHeader = () => {
           const headerData = fetchedHomeHeader[0];
           setHomeHeader(headerData);
           setUpdatedHomeHeader(headerData);
-          setFetchedHomeHeaderId(headerData._id);
+          setFetchedHomeHeaderId(headerData.id);
         } else {
           setError("No header data found.");
         }
