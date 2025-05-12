@@ -17,7 +17,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ["https://www.yhijaziportfolio.com"], // your frontend domain
+  origin: ["https://www.yhijaziportfolio.com"], 
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
