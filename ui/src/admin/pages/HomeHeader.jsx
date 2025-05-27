@@ -18,6 +18,9 @@ const HomeHeader = () => {
   const [files, setFiles] = useState([]);
   const [frenchResumeFile, setFrenchResumeFile] = useState(null);
   const [englishResumeFile, setEnglishResumeFile] = useState(null);
+  const [frenchResumeImage, setFrenchResumeImage] = useState(null);
+  const [englishResumeImage, setEnglishResumeImage] = useState(null);
+
   const [fetchedHomeHeaderId, setFetchedHomeHeaderId] = useState(null);
 
   useEffect(() => {
@@ -49,11 +52,11 @@ const HomeHeader = () => {
     setUpdatedHomeHeader((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleFileChange = (e) => {
-  const selectedFiles = Array.from(e.target.files || []);
-  console.log("Selected files for image upload:", selectedFiles);
-  setFiles(selectedFiles);
-};
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files || []);
+    console.log("Selected files for image upload:", selectedFiles);
+    setFiles(selectedFiles);
+  };
 
   const handlePdfChange = (e, field) => {
     const file = e.target.files[0];
@@ -69,6 +72,7 @@ const handleFileChange = (e) => {
       const updatedImages = homeHeader.resumeImg.filter(img => img !== imageToDelete);
       const updatedHeader = { ...updatedHomeHeader, resumeImg: updatedImages };
       await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+      console.log("Images to be saved:", resumeImages);
       setHomeHeader(updatedHeader);
       setUpdatedHomeHeader(updatedHeader);
       setSuccess(true);
@@ -103,57 +107,58 @@ const handleFileChange = (e) => {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    let resumeImages = [...(homeHeader?.resumeImg || [])]; // Use saved images as base
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+let resumeImages = [...(homeHeader?.resumeImg || [])];
 
-    // Upload new images (should be 2 max: French and English preview images)
-    if (files.length === 2 && files[0] && files[1]) {
-  const frenchImage = await handleFileUpload(files[0]);
-  const englishImage = await handleFileUpload(files[1]);
-  resumeImages = [frenchImage, englishImage];
+if (frenchResumeImage && englishResumeImage) {
+  const frenchImageURL = await handleFileUpload(frenchResumeImage);
+  const englishImageURL = await handleFileUpload(englishResumeImage);
+  resumeImages = [frenchImageURL, englishImageURL];
 }
 
 
-    // Upload PDFs
-    let frenchResumeLink = homeHeader.frenchResumeLink;
-    let englishResumeLink = homeHeader.englishResumeLink;
 
-    if (frenchResumeFile) {
-      frenchResumeLink = await handleFileUpload(frenchResumeFile);
-    }
-    if (englishResumeFile) {
-      englishResumeLink = await handleFileUpload(englishResumeFile);
-    }
+      // Upload PDFs
+      let frenchResumeLink = homeHeader.frenchResumeLink;
+      let englishResumeLink = homeHeader.englishResumeLink;
 
-    // Prepare object
-    const homeHeaderToUpdate = {
-      ...updatedHomeHeader,
-      resumeImg: resumeImages,
-      frenchResumeLink,
-      englishResumeLink,
-    };
+      if (frenchResumeFile) {
+        frenchResumeLink = await handleFileUpload(frenchResumeFile);
+      }
+      if (englishResumeFile) {
+        englishResumeLink = await handleFileUpload(englishResumeFile);
+      }
 
-    // Update
-    await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
-    setSuccess(true);
-
-    // Refetch updated data
-    const refreshed = await getHomeHeader();
-    if (Array.isArray(refreshed) && refreshed.length > 0) {
-      setHomeHeader(refreshed[0]);
-      setUpdatedHomeHeader(refreshed[0]);
-    }
-
-  } catch (updateError) {
-    console.error("Update failed:", updateError);
-    setError("Header update failed.");
-  }
+      // Prepare object
+const homeHeaderToUpdate = {
+  ...updatedHomeHeader,
+  resumeImg: resumeImages,
+  frenchResumeLink,
+  englishResumeLink,
 };
 
 
-  
+      // Update
+      await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
+      setSuccess(true);
+
+      // Refetch updated data
+      const refreshed = await getHomeHeader();
+      if (Array.isArray(refreshed) && refreshed.length > 0) {
+        setHomeHeader(refreshed[0]);
+        setUpdatedHomeHeader(refreshed[0]);
+      }
+
+    } catch (updateError) {
+      console.error("Update failed:", updateError);
+      setError("Header update failed.");
+    }
+  };
+
+
+
 
   return (
     <>
@@ -241,13 +246,13 @@ const handleSubmit = async (e) => {
                     <p>No images available</p>
                   )}
                   <div>
-  <p>Upload French Resume Image</p>
-  <input type="file" onChange={(e) => setFiles([e.target.files[0], files[1]])} />
-</div>
-<div>
-  <p>Upload English Resume Image</p>
-  <input type="file" onChange={(e) => setFiles([files[0], e.target.files[0]])} />
-</div>
+                    <p>Upload French Resume Image</p>
+                    <input type="file" accept="image/*" onChange={(e) => setFrenchResumeImage(e.target.files[0])} />
+                  </div>
+                  <div>
+                    <p>Upload English Resume Image</p>
+                    <input type="file" accept="image/*" onChange={(e) => setEnglishResumeImage(e.target.files[0])} />
+                  </div>
 
                 </div>
                 <button type="submit" className="homeHeaderUpdateButton">Update</button>
