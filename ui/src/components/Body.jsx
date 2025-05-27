@@ -60,28 +60,26 @@ const Body = () => {
           <SwiperSlide>
             <div className='content content3'>
               <div className='content-resume'>
-                {home?.frenchResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[0] && (
-                  <a href={home.frenchResumeLink} target="_blank" rel="noopener noreferrer">
-                    <button className='resume-button resume1'>
-                      <img src={home.frenchResumeImg} className='resume' alt='French resume' />
-
-                      <div className='layer'></div>
-                      <p className='resume-lang'>FRENCH</p>
-                    </button>
-                  </a>
-                )}
+{home?.frenchResumeLink && home?.frenchResumeImg && (
+  <a href={home.frenchResumeLink} target="_blank" rel="noopener noreferrer">
+    <button className='resume-button resume1'>
+      <img src={home.frenchResumeImg} className='resume' alt='French resume' />
+      <div className='layer'></div>
+      <p className='resume-lang'>FRENCH</p>
+    </button>
+  </a>
+)}
               </div>
               <div className='content-resume'>
-                {home?.englishResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[1] && (
-                  <a href={home.englishResumeLink} target="_blank" rel="noopener noreferrer">
-                    <button className='resume-button resume2'>
-                      
-<img src={home.englishResumeImg} className='resume' alt='English resume' />
-                      <div className='layer'></div>
-                      <p className='resume-lang'>ENGLISH</p>
-                    </button>
-                  </a>
-                )}
+{home?.englishResumeLink && home?.englishResumeImg && (
+  <a href={home.englishResumeLink} target="_blank" rel="noopener noreferrer">
+    <button className='resume-button resume2'>
+      <img src={home.englishResumeImg} className='resume' alt='English resume' />
+      <div className='layer'></div>
+      <p className='resume-lang'>ENGLISH</p>
+    </button>
+  </a>
+)}
               </div>
             </div>
           </SwiperSlide>

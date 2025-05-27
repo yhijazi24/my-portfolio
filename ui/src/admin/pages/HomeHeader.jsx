@@ -232,8 +232,17 @@ const homeHeaderToUpdate = {
                   {homeHeader?.resumeImg?.length > 0 ? (
                     homeHeader.resumeImg.map((image, index) => (
                       <div key={index} className="homeHeaderImageContainer">
-                        <img src={homeHeader?.frenchResumeImg} alt="French CV" />
-<img src={homeHeader?.englishResumeImg} alt="English CV" />
+                      <img
+  src={homeHeader?.frenchResumeImg || "https://via.placeholder.com/150"}
+  alt="French Resume"
+  className="homeHeaderShowImg"
+/>
+<img
+  src={homeHeader?.englishResumeImg || "https://via.placeholder.com/150"}
+  alt="English Resume"
+  className="homeHeaderShowImg"
+/>
+
 
                         <div className="homeHeaderImageActions">
                           <label htmlFor={`file-${index}`}>
