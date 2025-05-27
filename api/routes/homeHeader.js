@@ -2,22 +2,26 @@ const express = require('express');
 const router = express.Router();
 const HomeHeader = require('../models/HomeHeader');
 
-// GET all
 router.get('/', async (req, res) => {
   try {
     const headers = await HomeHeader.findAll();
+
     const parsedHeaders = headers.map(header => {
-      const data = header.get({ plain: true }); // ✅ triggers all getters
-      return {
-        ...data,
-        resumeImg: header.resumeImg // ✅ re-triggers the resumeImg getter safely
-      };
+      // Get plain object
+      const data = header.get({ plain: true });
+
+      // Force inject JSON field from actual Sequelize instance (bypasses stale value)
+      data.resumeImg = header.resumeImg;
+
+      return data;
     });
+
     res.status(200).json(parsedHeaders);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 
