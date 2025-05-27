@@ -4,19 +4,19 @@ const HomeHeader = require('../models/HomeHeader');
 
 // GET all
 router.get('/', async (req, res) => {
-    try {
-      const headers = await HomeHeader.findAll();
-  
-      // Force getters (like resumeImg) to apply
-      const parsedHeaders = headers.map(header => header.toJSON());
-  
-      res.status(200).json(parsedHeaders);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
-  
-  
+  try {
+    const headers = await HomeHeader.findAll();
+    res.status(200).json(headers.map(header => ({
+      ...header.dataValues,
+      resumeImg: header.resumeImg  // Triggers the custom getter properly
+    })));
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 
 // CREATE
 router.post('/', async (req, res) => {
