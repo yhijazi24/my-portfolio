@@ -49,9 +49,11 @@ const HomeHeader = () => {
     setUpdatedHomeHeader((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
-    setFiles([...e.target.files]);
-  };
+const handleFileChange = (e) => {
+  const selectedFiles = Array.from(e.target.files || []);
+  console.log("Selected files for image upload:", selectedFiles);
+  setFiles(selectedFiles);
+};
 
   const handlePdfChange = (e, field) => {
     const file = e.target.files[0];
@@ -107,13 +109,12 @@ const handleSubmit = async (e) => {
     let resumeImages = [...(homeHeader?.resumeImg || [])]; // Use saved images as base
 
     // Upload new images (should be 2 max: French and English preview images)
-    if (files.length > 0) {
-      resumeImages = []; // Clear previous if new ones selected
-      for (let file of files) {
-        const downloadURL = await handleFileUpload(file);
-        resumeImages.push(downloadURL);
-      }
-    }
+    if (files.length === 2 && files[0] && files[1]) {
+  const frenchImage = await handleFileUpload(files[0]);
+  const englishImage = await handleFileUpload(files[1]);
+  resumeImages = [frenchImage, englishImage];
+}
+
 
     // Upload PDFs
     let frenchResumeLink = homeHeader.frenchResumeLink;
@@ -239,10 +240,15 @@ const handleSubmit = async (e) => {
                   ) : (
                     <p>No images available</p>
                   )}
-                  <label htmlFor="file">
-                    <Publish className="homeHeaderUpdateIcon" />
-                  </label>
-                  <input type="file" id="file" multiple style={{ display: "none" }} onChange={handleFileChange} />
+                  <div>
+  <p>Upload French Resume Image</p>
+  <input type="file" onChange={(e) => setFiles([e.target.files[0], files[1]])} />
+</div>
+<div>
+  <p>Upload English Resume Image</p>
+  <input type="file" onChange={(e) => setFiles([files[0], e.target.files[0]])} />
+</div>
+
                 </div>
                 <button type="submit" className="homeHeaderUpdateButton">Update</button>
               </div>
