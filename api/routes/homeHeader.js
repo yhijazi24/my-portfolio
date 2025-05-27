@@ -2,14 +2,21 @@ const express = require('express');
 const router = express.Router();
 const HomeHeader = require('../models/HomeHeader');
 
-
 router.get('/', async (req, res) => {
   try {
     const headers = await HomeHeader.findAll();
 
     const parsedHeaders = headers.map(header => {
-      const data = header.toJSON(); // ✅ Use Sequelize's toJSON which keeps JSON fields intact
-      return data;
+      const raw = header.get({ plain: true });
+      // Force resumeImg to parse as array
+      if (typeof raw.resumeImg === 'string') {
+        try {
+          raw.resumeImg = JSON.parse(raw.resumeImg);
+        } catch {
+          raw.resumeImg = [];
+        }
+      }
+      return raw;
     });
 
     res.status(200).json(parsedHeaders);
@@ -17,9 +24,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
 
 
 router.post('/', async (req, res) => {
