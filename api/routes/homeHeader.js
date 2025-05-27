@@ -6,11 +6,14 @@ const HomeHeader = require('../models/HomeHeader');
 router.get('/', async (req, res) => {
   try {
     const headers = await HomeHeader.findAll();
-    res.status(200).json(headers.map(header => ({
-      ...header.dataValues,
-      resumeImg: header.resumeImg  // Triggers the custom getter properly
-    })));
-
+    const parsedHeaders = headers.map(header => {
+      const data = header.get({ plain: true }); // ✅ triggers all getters
+      return {
+        ...data,
+        resumeImg: header.resumeImg // ✅ re-triggers the resumeImg getter safely
+      };
+    });
+    res.status(200).json(parsedHeaders);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
