@@ -23,11 +23,26 @@ resumeImg: {
     }
   },
   set(value) {
-    if (Array.isArray(value)) {
-      this.setDataValue('resumeImg', JSON.stringify(value));
-    } else {
-      console.error('⚠️ resumeImg must be an array');
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) {
+        this.setDataValue('resumeImg', JSON.stringify(parsed));
+      } else {
+        throw new Error('resumeImg must be an array');
+      }
+    } catch (e) {
+      console.error('Invalid resumeImg input:', value);
+      this.setDataValue('resumeImg', '[]');
     }
+  } else if (Array.isArray(value)) {
+    this.setDataValue('resumeImg', JSON.stringify(value));
+  } else {
+    console.error('resumeImg must be an array or stringified array');
+    this.setDataValue('resumeImg', '[]');
+  }
+}
+
   }
 },
   frenchResumeLink: {

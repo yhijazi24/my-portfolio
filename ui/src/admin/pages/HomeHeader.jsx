@@ -72,7 +72,8 @@ const HomeHeader = () => {
       const updatedImages = homeHeader.resumeImg.filter(img => img !== imageToDelete);
       const updatedHeader = { ...updatedHomeHeader, resumeImg: updatedImages };
       await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
-      console.log("Images to be saved:", resumeImages);
+      console.log("Images to be saved:", updatedImages);
+
       setHomeHeader(updatedHeader);
       setUpdatedHomeHeader(updatedHeader);
       setSuccess(true);
