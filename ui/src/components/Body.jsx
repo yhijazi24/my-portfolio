@@ -63,7 +63,8 @@ const Body = () => {
                 {home?.frenchResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[0] && (
                   <a href={home.frenchResumeLink} target="_blank" rel="noopener noreferrer">
                     <button className='resume-button resume1'>
-                      <img src={home.resumeImg[0]} className='resume' alt='French resume' />
+                      <img src={home.frenchResumeImg} className='resume' alt='French resume' />
+
                       <div className='layer'></div>
                       <p className='resume-lang'>FRENCH</p>
                     </button>
@@ -74,7 +75,8 @@ const Body = () => {
                 {home?.englishResumeLink && Array.isArray(home.resumeImg) && home.resumeImg[1] && (
                   <a href={home.englishResumeLink} target="_blank" rel="noopener noreferrer">
                     <button className='resume-button resume2'>
-                      <img src={home.resumeImg[1]} className='resume' alt='English resume' />
+                      
+<img src={home.englishResumeImg} className='resume' alt='English resume' />
                       <div className='layer'></div>
                       <p className='resume-lang'>ENGLISH</p>
                     </button>

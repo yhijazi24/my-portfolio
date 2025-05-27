@@ -111,12 +111,14 @@ const HomeHeader = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-let resumeImages = [...(homeHeader?.resumeImg || [])];
+let frenchResumeImg = homeHeader.frenchResumeImg;
+let englishResumeImg = homeHeader.englishResumeImg;
 
-if (frenchResumeImage && englishResumeImage) {
-  const frenchImageURL = await handleFileUpload(frenchResumeImage);
-  const englishImageURL = await handleFileUpload(englishResumeImage);
-  resumeImages = [frenchImageURL, englishImageURL];
+if (frenchResumeImage) {
+  frenchResumeImg = await handleFileUpload(frenchResumeImage);
+}
+if (englishResumeImage) {
+  englishResumeImg = await handleFileUpload(englishResumeImage);
 }
 
 
@@ -135,10 +137,12 @@ if (frenchResumeImage && englishResumeImage) {
       // Prepare object
 const homeHeaderToUpdate = {
   ...updatedHomeHeader,
-  resumeImg: resumeImages,
   frenchResumeLink,
   englishResumeLink,
+  frenchResumeImg,
+  englishResumeImg,
 };
+
 
 
       // Update
@@ -228,7 +232,9 @@ const homeHeaderToUpdate = {
                   {homeHeader?.resumeImg?.length > 0 ? (
                     homeHeader.resumeImg.map((image, index) => (
                       <div key={index} className="homeHeaderImageContainer">
-                        <img className="homeHeaderUpdateImg" src={image || "https://via.placeholder.com/150"} alt={`Header Image ${index + 1}`} />
+                        <img src={homeHeader?.frenchResumeImg} alt="French CV" />
+<img src={homeHeader?.englishResumeImg} alt="English CV" />
+
                         <div className="homeHeaderImageActions">
                           <label htmlFor={`file-${index}`}>
                             <Publish className="homeHeaderUpdateIcon" />

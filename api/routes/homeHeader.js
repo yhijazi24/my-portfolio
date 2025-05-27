@@ -8,14 +8,6 @@ router.get('/', async (req, res) => {
 
     const parsedHeaders = headers.map(header => {
       const raw = header.get({ plain: true });
-      // Force resumeImg to parse as array
-      if (typeof raw.resumeImg === 'string') {
-        try {
-          raw.resumeImg = JSON.parse(raw.resumeImg);
-        } catch {
-          raw.resumeImg = [];
-        }
-      }
       return raw;
     });
 

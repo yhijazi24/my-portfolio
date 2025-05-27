@@ -10,11 +10,15 @@ const HomeHeader = sequelize.define('HomeHeader', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  resumeImg: {
-    type: DataTypes.JSON, // ✅ Native JSON storage
-    allowNull: false,
-    defaultValue: [],     // ✅ Always starts as array
-  },
+  frenchResumeImg: {
+  type: DataTypes.STRING,
+  allowNull: false,
+},
+englishResumeImg: {
+  type: DataTypes.STRING,
+  allowNull: false,
+},
+
   frenchResumeLink: {
     type: DataTypes.STRING,
     allowNull: false,
