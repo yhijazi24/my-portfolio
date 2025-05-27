@@ -10,41 +10,11 @@ const HomeHeader = sequelize.define('HomeHeader', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-resumeImg: {
-  type: DataTypes.TEXT,
-  allowNull: false,
-  get() {
-    const raw = this.getDataValue('resumeImg');
-    try {
-      return raw ? JSON.parse(raw) : [];
-    } catch (err) {
-      console.error('⚠️ Failed to parse resumeImg:', raw, err.message);
-      return [];
-    }
+  resumeImg: {
+    type: DataTypes.JSON, // ✅ Native JSON storage
+    allowNull: false,
+    defaultValue: [],     // ✅ Always starts as array
   },
-  set(value) {
-  if (typeof value === 'string') {
-    try {
-      const parsed = JSON.parse(value);
-      if (Array.isArray(parsed)) {
-        this.setDataValue('resumeImg', JSON.stringify(parsed));
-      } else {
-        throw new Error('resumeImg must be an array');
-      }
-    } catch (e) {
-      console.error('Invalid resumeImg input:', value);
-      this.setDataValue('resumeImg', '[]');
-    }
-  } else if (Array.isArray(value)) {
-    this.setDataValue('resumeImg', JSON.stringify(value));
-  } else {
-    console.error('resumeImg must be an array or stringified array');
-    this.setDataValue('resumeImg', '[]');
-  }
-}
-
-  }
-},
   frenchResumeLink: {
     type: DataTypes.STRING,
     allowNull: false,
