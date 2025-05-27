@@ -19,7 +19,7 @@ import './App.css';
 
 function App() {
   const [admin, setAdmin] = useState(null);
-  const isMaintenance = true; // Toggle this manually or fetch it from backend
+  const isMaintenance = false; // Toggle this manually or fetch it from backend
 
   useEffect(() => {
     const storedData = localStorage.getItem("persist:root");
