@@ -101,40 +101,56 @@ const HomeHeader = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let uploadedImages = [...updatedHomeHeader.resumeImg || []];
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    let resumeImages = [...(homeHeader?.resumeImg || [])]; // Use saved images as base
 
-      // Handle image uploads
-      if (files.length > 0) {
-        for (let file of files) {
-          const downloadURL = await handleFileUpload(file);
-          uploadedImages.push(downloadURL);
-        }
+    // Upload new images (should be 2 max: French and English preview images)
+    if (files.length > 0) {
+      resumeImages = []; // Clear previous if new ones selected
+      for (let file of files) {
+        const downloadURL = await handleFileUpload(file);
+        resumeImages.push(downloadURL);
       }
-
-      const homeHeaderToUpdate = { ...updatedHomeHeader, resumeImg: uploadedImages };
-
-      // Handle French Resume PDF upload
-      if (frenchResumeFile) {
-        const frenchResumeLink = await handleFileUpload(frenchResumeFile);
-        homeHeaderToUpdate.frenchResumeLink = frenchResumeLink;
-      }
-
-      // Handle English Resume PDF upload
-      if (englishResumeFile) {
-        const englishResumeLink = await handleFileUpload(englishResumeFile);
-        homeHeaderToUpdate.englishResumeLink = englishResumeLink;
-      }
-
-      await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
-      setSuccess(true);
-    } catch (updateError) {
-      console.error("Update failed:", updateError);
-      setError("Header update failed.");
     }
-  };
+
+    // Upload PDFs
+    let frenchResumeLink = homeHeader.frenchResumeLink;
+    let englishResumeLink = homeHeader.englishResumeLink;
+
+    if (frenchResumeFile) {
+      frenchResumeLink = await handleFileUpload(frenchResumeFile);
+    }
+    if (englishResumeFile) {
+      englishResumeLink = await handleFileUpload(englishResumeFile);
+    }
+
+    // Prepare object
+    const homeHeaderToUpdate = {
+      ...updatedHomeHeader,
+      resumeImg: resumeImages,
+      frenchResumeLink,
+      englishResumeLink,
+    };
+
+    // Update
+    await updateHomeHeader(fetchedHomeHeaderId, homeHeaderToUpdate, dispatch);
+    setSuccess(true);
+
+    // Refetch updated data
+    const refreshed = await getHomeHeader();
+    if (Array.isArray(refreshed) && refreshed.length > 0) {
+      setHomeHeader(refreshed[0]);
+      setUpdatedHomeHeader(refreshed[0]);
+    }
+
+  } catch (updateError) {
+    console.error("Update failed:", updateError);
+    setError("Header update failed.");
+  }
+};
+
 
   
 
