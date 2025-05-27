@@ -67,21 +67,37 @@ const HomeHeader = () => {
     }
   };
 
-  const handleDeleteImage = async (imageToDelete) => {
-    try {
-      const updatedImages = homeHeader.resumeImg.filter(img => img !== imageToDelete);
-      const updatedHeader = { ...updatedHomeHeader, resumeImg: updatedImages };
-      await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
-      console.log("Images to be saved:", updatedImages);
+const handleDeleteFrenchImage = async () => {
+  try {
+    const updatedHeader = {
+      ...updatedHomeHeader,
+      frenchResumeImg: "",
+    };
+    await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+    setHomeHeader(updatedHeader);
+    setUpdatedHomeHeader(updatedHeader);
+    setSuccess(true);
+  } catch (error) {
+    console.error("Failed to delete French image:", error);
+    setError("French resume image deletion failed.");
+  }
+};
+const handleDeleteEnglishImage = async () => {
+  try {
+    const updatedHeader = {
+      ...updatedHomeHeader,
+      englishResumeImg: "",
+    };
+    await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+    setHomeHeader(updatedHeader);
+    setUpdatedHomeHeader(updatedHeader);
+    setSuccess(true);
+  } catch (error) {
+    console.error("Failed to delete English image:", error);
+    setError("English resume image deletion failed.");
+  }
+};
 
-      setHomeHeader(updatedHeader);
-      setUpdatedHomeHeader(updatedHeader);
-      setSuccess(true);
-    } catch (error) {
-      console.error("Failed to delete image:", error);
-      setError("Image deletion failed.");
-    }
-  };
 
   const handleFileUpload = async (file) => {
     const storage = getStorage(app);
@@ -237,11 +253,13 @@ const homeHeaderToUpdate = {
   alt="French Resume"
   className="homeHeaderShowImg"
 />
+<button onClick={handleDeleteFrenchImage}>Delete French Image</button>
 <img
   src={homeHeader?.englishResumeImg || "https://via.placeholder.com/150"}
   alt="English Resume"
   className="homeHeaderShowImg"
 />
+<button onClick={handleDeleteEnglishImage}>Delete English Image</button>
 
 
                         <div className="homeHeaderImageActions">
@@ -254,7 +272,6 @@ const homeHeaderToUpdate = {
                             style={{ display: "none" }}
                             onChange={handleFileChange}
                           />
-                          <button type="button" onClick={() => handleDeleteImage(image)}>Delete</button>
                         </div>
                       </div>
                     ))
