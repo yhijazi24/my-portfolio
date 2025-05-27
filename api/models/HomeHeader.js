@@ -10,17 +10,26 @@ const HomeHeader = sequelize.define('HomeHeader', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  resumeImg: {
-    type: DataTypes.TEXT, 
-    allowNull: false,
-    get() {
-      const raw = this.getDataValue('resumeImg');
+resumeImg: {
+  type: DataTypes.TEXT,
+  allowNull: false,
+  get() {
+    const raw = this.getDataValue('resumeImg');
+    try {
       return raw ? JSON.parse(raw) : [];
-    },
-    set(value) {
-      this.setDataValue('resumeImg', JSON.stringify(value));
-    },
+    } catch (err) {
+      console.error('⚠️ Failed to parse resumeImg:', raw, err.message);
+      return [];
+    }
   },
+  set(value) {
+    if (Array.isArray(value)) {
+      this.setDataValue('resumeImg', JSON.stringify(value));
+    } else {
+      console.error('⚠️ resumeImg must be an array');
+    }
+  }
+},
   frenchResumeLink: {
     type: DataTypes.STRING,
     allowNull: false,

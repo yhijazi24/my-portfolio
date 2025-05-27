@@ -21,15 +21,16 @@ router.get('/', async (req, res) => {
 
 
 
-// CREATE
 router.post('/', async (req, res) => {
   try {
+    console.log("Received body:", req.body); // 👈 add this
     const header = await HomeHeader.create(req.body);
     res.status(201).json(header);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // UPDATE
 router.put('/:id', async (req, res) => {
