@@ -32,18 +32,38 @@ router.post('/', async (req, res) => {
 // UPDATE
 router.put('/:id', async (req, res) => {
   try {
-    const [rowsUpdated] = await HomeHeader.update(req.body, {
-      where: { id: req.params.id },
-    });
-    if (rowsUpdated > 0) {
-      const updated = await HomeHeader.findByPk(req.params.id);
-      res.status(200).json(updated);
-    } else {
-      res.status(404).json({ error: 'Not found' });
+    const homeHeader = await HomeHeader.findByPk(req.params.id);
+
+    if (!homeHeader) {
+      return res.status(404).json({ error: 'Not found' });
     }
+
+    // 👇 Only update fields that are explicitly sent in req.body
+    if (req.body.frenchResumeLink !== undefined) {
+      homeHeader.frenchResumeLink = req.body.frenchResumeLink;
+    }
+
+    if (req.body.englishResumeLink !== undefined) {
+      homeHeader.englishResumeLink = req.body.englishResumeLink;
+    }
+
+    if (req.body.aboutMe !== undefined) {
+      homeHeader.aboutMe = req.body.aboutMe;
+    }
+
+    // Only update resumeImg if present
+    if (req.body.resumeImg !== undefined) {
+      homeHeader.resumeImg = req.body.resumeImg;
+    }
+
+    // Save the updated model
+    await homeHeader.save();
+
+    res.status(200).json(homeHeader);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 module.exports = router;
