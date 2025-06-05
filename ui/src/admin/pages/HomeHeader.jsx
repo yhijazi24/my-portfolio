@@ -15,7 +15,6 @@ const HomeHeader = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [files, setFiles] = useState([]);
   const [frenchResumeFile, setFrenchResumeFile] = useState(null);
   const [englishResumeFile, setEnglishResumeFile] = useState(null);
   const [frenchResumeImage, setFrenchResumeImage] = useState(null);
@@ -67,36 +66,36 @@ const HomeHeader = () => {
     }
   };
 
-const handleDeleteFrenchImage = async () => {
-  try {
-    const updatedHeader = {
-      ...updatedHomeHeader,
-      frenchResumeImg: "",
-    };
-    await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
-    setHomeHeader(updatedHeader);
-    setUpdatedHomeHeader(updatedHeader);
-    setSuccess(true);
-  } catch (error) {
-    console.error("Failed to delete French image:", error);
-    setError("French resume image deletion failed.");
-  }
-};
-const handleDeleteEnglishImage = async () => {
-  try {
-    const updatedHeader = {
-      ...updatedHomeHeader,
-      englishResumeImg: "",
-    };
-    await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
-    setHomeHeader(updatedHeader);
-    setUpdatedHomeHeader(updatedHeader);
-    setSuccess(true);
-  } catch (error) {
-    console.error("Failed to delete English image:", error);
-    setError("English resume image deletion failed.");
-  }
-};
+  const handleDeleteFrenchImage = async () => {
+    try {
+      const updatedHeader = {
+        ...updatedHomeHeader,
+        frenchResumeImg: "",
+      };
+      await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+      setHomeHeader(updatedHeader);
+      setUpdatedHomeHeader(updatedHeader);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to delete French image:", error);
+      setError("French resume image deletion failed.");
+    }
+  };
+  const handleDeleteEnglishImage = async () => {
+    try {
+      const updatedHeader = {
+        ...updatedHomeHeader,
+        englishResumeImg: "",
+      };
+      await updateHomeHeader(fetchedHomeHeaderId, updatedHeader, dispatch);
+      setHomeHeader(updatedHeader);
+      setUpdatedHomeHeader(updatedHeader);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to delete English image:", error);
+      setError("English resume image deletion failed.");
+    }
+  };
 
 
   const handleFileUpload = async (file) => {
@@ -127,15 +126,15 @@ const handleDeleteEnglishImage = async () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-let frenchResumeImg = homeHeader.frenchResumeImg;
-let englishResumeImg = homeHeader.englishResumeImg;
+      let frenchResumeImg = homeHeader.frenchResumeImg;
+      let englishResumeImg = homeHeader.englishResumeImg;
 
-if (frenchResumeImage) {
-  frenchResumeImg = await handleFileUpload(frenchResumeImage);
-}
-if (englishResumeImage) {
-  englishResumeImg = await handleFileUpload(englishResumeImage);
-}
+      if (frenchResumeImage) {
+        frenchResumeImg = await handleFileUpload(frenchResumeImage);
+      }
+      if (englishResumeImage) {
+        englishResumeImg = await handleFileUpload(englishResumeImage);
+      }
 
 
 
@@ -151,13 +150,13 @@ if (englishResumeImage) {
       }
 
       // Prepare object
-const homeHeaderToUpdate = {
-  ...updatedHomeHeader,
-  frenchResumeLink,
-  englishResumeLink,
-  frenchResumeImg,
-  englishResumeImg,
-};
+      const homeHeaderToUpdate = {
+        ...updatedHomeHeader,
+        frenchResumeLink,
+        englishResumeLink,
+        frenchResumeImg,
+        englishResumeImg,
+      };
 
 
 
@@ -192,18 +191,23 @@ const homeHeaderToUpdate = {
         <div className="homeHeaderContainer">
           <div className="homeHeaderShow">
             <div className="homeHeaderShowTop">
-              {homeHeader?.resumeImg?.length > 0 ? (
-                homeHeader.resumeImg.map((image, index) => (
+              <div className="homeHeaderShowTopImages">
+                {homeHeader?.frenchResumeImg && (
                   <img
-                    key={index}
-                    src={image || "https://via.placeholder.com/150"}
-                    alt={homeHeader?.title || "Default Title"}
+                    src={homeHeader.frenchResumeImg}
+                    alt="French Resume"
                     className="homeHeaderShowImg"
                   />
-                ))
-              ) : (
-                <p>No images available</p>
-              )}
+                )}
+                {homeHeader?.englishResumeImg && (
+                  <img
+                    src={homeHeader.englishResumeImg}
+                    alt="English Resume"
+                    className="homeHeaderShowImg"
+                  />
+                )}
+              </div>
+
               <div className="homeHeaderShowTopTitle">
                 <span className="homeHeaderShowTitle">{homeHeader?.title || "Default Title"}</span>
                 <span className="homeHeaderShowAboutMe">{homeHeader?.aboutMe || "Default About Me"}</span>
@@ -245,39 +249,30 @@ const homeHeaderToUpdate = {
               </div>
               <div className="homeHeaderUpdateRight">
                 <div className="homeHeaderUpdateUpload">
-                  {homeHeader?.resumeImg?.length > 0 ? (
-                    homeHeader.resumeImg.map((image, index) => (
-                      <div key={index} className="homeHeaderImageContainer">
-                      <img
-  src={homeHeader?.frenchResumeImg || "https://via.placeholder.com/150"}
-  alt="French Resume"
-  className="homeHeaderShowImg"
-/>
-<button onClick={handleDeleteFrenchImage}>Delete French Image</button>
-<img
-  src={homeHeader?.englishResumeImg || "https://via.placeholder.com/150"}
-  alt="English Resume"
-  className="homeHeaderShowImg"
-/>
-<button onClick={handleDeleteEnglishImage}>Delete English Image</button>
+                  <div className="homeHeaderImageContainer">
+                    {homeHeader?.frenchResumeImg && (
+                      <>
+                        <img
+                          src={homeHeader.frenchResumeImg}
+                          alt="French Resume"
+                          className="homeHeaderShowImg"
+                        />
+                        <button onClick={handleDeleteFrenchImage}>Delete French Image</button>
+                      </>
+                    )}
 
+                    {homeHeader?.englishResumeImg && (
+                      <>
+                        <img
+                          src={homeHeader.englishResumeImg}
+                          alt="English Resume"
+                          className="homeHeaderShowImg"
+                        />
+                        <button onClick={handleDeleteEnglishImage}>Delete English Image</button>
+                      </>
+                    )}
+                  </div>
 
-                        <div className="homeHeaderImageActions">
-                          <label htmlFor={`file-${index}`}>
-                            <Publish className="homeHeaderUpdateIcon" />
-                          </label>
-                          <input
-                            type="file"
-                            id={`file-${index}`}
-                            style={{ display: "none" }}
-                            onChange={handleFileChange}
-                          />
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No images available</p>
-                  )}
                   <div>
                     <p>Upload French Resume Image</p>
                     <input type="file" accept="image/*" onChange={(e) => setFrenchResumeImage(e.target.files[0])} />
