@@ -12,11 +12,11 @@ const HomeHeader = sequelize.define('HomeHeader', {
   },
   frenchResumeImg: {
   type: DataTypes.STRING,
-  allowNull: false,
+  allowNull: true,
 },
 englishResumeImg: {
   type: DataTypes.STRING,
-  allowNull: false,
+  allowNull: true,
 },
 
   frenchResumeLink: {
