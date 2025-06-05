@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
       return res.status(200).json([]);
     }
 
-    const parsedHeaders = headers.map(header => header.get({ plain: true }));
 
     res.status(200).json(parsedHeaders);
   } catch (err) {
