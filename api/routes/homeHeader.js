@@ -50,12 +50,6 @@ router.put('/:id', async (req, res) => {
     if (req.body.aboutMe !== undefined) {
       homeHeader.aboutMe = req.body.aboutMe;
     }
-
-    // Only update resumeImg if present
-    if (req.body.resumeImg !== undefined) {
-      homeHeader.resumeImg = req.body.resumeImg;
-    }
-
     // Save the updated model
     await homeHeader.save();
 
