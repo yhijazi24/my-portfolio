@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const HomeHeader = require('../models/HomeHeader');
-
 router.get('/', async (req, res) => {
   try {
     const headers = await HomeHeader.findAll();
 
-    const parsedHeaders = headers.map(header => {
-      const raw = header.get({ plain: true });
-      return raw;
-    });
+    if (!headers || headers.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    const parsedHeaders = headers.map(header => header.get({ plain: true }));
 
     res.status(200).json(parsedHeaders);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 router.post('/', async (req, res) => {
