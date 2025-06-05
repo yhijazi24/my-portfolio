@@ -12,17 +12,23 @@ const Body = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const labels = ['HOME', 'ABOUT ME', 'RESUME'];
 
-  useEffect(() => {
-    const getHome = async () => {
-      try {
-        const res = await axios.get("https://portfolio-backend-upzy.onrender.com/homeHeader/");
-        setHome(res.data[0]);
-      } catch (err) {
-        console.error("Error fetching data: ", err.response ? err.response.data : err.message);
+useEffect(() => {
+  const getHome = async () => {
+    try {
+      const res = await axios.get("https://portfolio-backend-upzy.onrender.com/homeHeader/");
+      const data = Array.isArray(res.data) ? res.data[0] : null;
+      if (data) {
+        setHome(data);
+      } else {
+        console.warn("No home header found.");
       }
-    };
-    getHome();
-  }, []);
+    } catch (err) {
+      console.error("Error fetching data: ", err.response ? err.response.data : err.message);
+    }
+  };
+  getHome();
+}, []);
+
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.activeIndex);

@@ -22,29 +22,27 @@ const HomeHeader = () => {
 
   const [fetchedHomeHeaderId, setFetchedHomeHeaderId] = useState(null);
 
-  useEffect(() => {
-    const fetchHomeHeader = async () => {
-      setLoading(true);
-      try {
-        const fetchedHomeHeader = await getHomeHeader();
-        console.log("Fetched home header:", fetchedHomeHeader);
-
-        if (Array.isArray(fetchedHomeHeader) && fetchedHomeHeader.length > 0) {
-          const headerData = fetchedHomeHeader[0];
-          setHomeHeader(headerData);
-          setUpdatedHomeHeader(headerData);
-          setFetchedHomeHeaderId(headerData.id);
-        } else {
-          setError("No header data found.");
-        }
-      } catch (err) {
-        setError("Failed to fetch header.");
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  const fetchHomeHeader = async () => {
+    setLoading(true);
+    try {
+      const fetchedHomeHeader = await getHomeHeader();
+      if (fetchedHomeHeader.length > 0) {
+        const headerData = fetchedHomeHeader[0];
+        setHomeHeader(headerData);
+        setUpdatedHomeHeader(headerData);
+        setFetchedHomeHeaderId(headerData.id);
+      } else {
+        setError("No header data found.");
       }
-    };
-    fetchHomeHeader();
-  }, []);
+    } catch (err) {
+      setError("Failed to fetch header.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchHomeHeader();
+}, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

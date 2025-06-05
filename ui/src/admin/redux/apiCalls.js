@@ -103,12 +103,14 @@ export const addProject = async (project) => {
 
 export const getHomeHeader = async () => {
   try {
-    const res = await userRequest.get(`/homeHeader/`);
-    return res.data;
+    const res = await axios.get("https://portfolio-backend-upzy.onrender.com/homeHeader/");
+    return Array.isArray(res.data) ? res.data : [];
   } catch (err) {
-    console.error(err);
+    console.error("getHomeHeader failed:", err);
+    return [];
   }
 };
+
 
 export const updateHomeHeader = async (headerId, updatedHeader) => {
   try {
