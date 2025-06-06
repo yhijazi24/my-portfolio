@@ -50,7 +50,6 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={admin ? <Navigate to="/admin" /> : <AdminLogin />} />
-        <Route path="/admin/*" element={admin ? <ProjectList /> : <Navigate to="/admin/login" />} />
         {admin && (
           <>
             <Route exact path="/admin" element={<ProjectList />} />
@@ -60,8 +59,11 @@ function App() {
             <Route exact path="/admin/homeProjects" element={<HomeProjects />} />
             <Route exact path="/admin/footer" element={<Footer />} />
             <Route exact path="/admin/contact" element={<ContactAdmin />} />
+            {/* Catch-all for unknown /admin paths */}
+            <Route path="/admin/*" element={<Navigate to="/admin" />} />
           </>
         )}
+
         <Route path="*" element={admin ? <Navigate to="/admin" /> : <Navigate to="/admin/login" />} />
       </Routes>
     </Router>
