@@ -29,8 +29,8 @@ app.use(cors({
 app.use(express.json(
   
 ));
-sequelize.sync({ force: true })
-  .then(() => console.log("✅ All tables dropped and re-created."))
+sequelize.sync({ alter: true })
+  .then(() => console.log("✅ Database synced"))
   .catch((err) => console.error("❌ DB sync error:", err));
 
 
