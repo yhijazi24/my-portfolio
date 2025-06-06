@@ -74,7 +74,7 @@ const Body = () => {
                     <button className='resume-button resume1'>
                       <img src={home.frenchResumeImg} className='resume' alt='French resume' />
                       <div className='layer'></div>
-                      <p className='resume-lang'>FRENCH</p>
+                      <p className='resume-lang'>{t("french")}</p>
                     </button>
                   </a>
                 )}
@@ -85,7 +85,7 @@ const Body = () => {
                     <button className='resume-button resume2'>
                       <img src={home.englishResumeImg} className='resume' alt='English resume' />
                       <div className='layer'></div>
-                      <p className='resume-lang'>ENGLISH</p>
+                      <p className='resume-lang'>{t("english")}</p>
                     </button>
                   </a>
                 )}
