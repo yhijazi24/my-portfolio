@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './css/contactForm.css';
+import { useTranslation } from 'react-i18next';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const ContactForm = () => {
         subject: '',
         message: '',
     });
+const { t } = useTranslation();
 
     const handleChange = (e) => {
         setFormData({

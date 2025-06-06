@@ -8,7 +8,6 @@ const HomeProjects = () => {
   const [projectsData, setProjectsData] = useState(null);
   const projectRef = useRef(null);
   const { i18n } = useTranslation();
-
   useEffect(() => {
     const fetchProjectsData = async () => {
       try {

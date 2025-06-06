@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; 
 import './css/footer.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const [footer, setFooter] = useState(null); // null until loaded
-
+const { t } = useTranslation();
   useEffect(() => {
     const getFooter = async () => {
       try {
