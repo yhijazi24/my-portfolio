@@ -23,7 +23,7 @@ const ProjectsList = () => {
   useEffect(() => {
     const getProjects = async () => {
       try {
-        const res = await axios.get(` https://portfolio-w14d.onrender.com/projects/`);
+        const res = await axios.get(`https://portfolio-w14d.onrender.com/projects/`);
         setProjects(res.data);
       } catch (err) {
         console.error(err);

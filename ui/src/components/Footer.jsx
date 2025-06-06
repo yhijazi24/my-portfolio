@@ -9,7 +9,7 @@ const Footer = () => {
   useEffect(() => {
     const getFooter = async () => {
       try {
-        const res = await axios.get(` https://portfolio-w14d.onrender.com/footer/`);
+        const res = await axios.get(`https://portfolio-w14d.onrender.com/footer/`);
         console.log('Fetched Footer Data:', res.data);
         if (Array.isArray(res.data) && res.data.length > 0) {
           setFooter(res.data[0]);

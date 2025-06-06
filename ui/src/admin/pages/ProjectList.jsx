@@ -63,7 +63,7 @@ const ProjectList = () => {
             renderCell: (params) => {
                 return (
                     <div className="projectListItem image">
-                        <img className="projectListImg" src={params.row.img} alt="" />
+                        <img className="projectListImg" src={params.row.img?.[0]} alt="" />
                     </div>
                 );
             },
