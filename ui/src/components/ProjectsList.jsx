@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const ProjectsList = () => {
   const [filtersVisible, setFiltersVisible] = useState(false);
@@ -76,7 +77,7 @@ const ProjectsList = () => {
           <div className='project-list-filter'>
             <div className='projects-filter'>
               <button className='filter-button' onClick={() => setFilters([])}>
-                All
+                {t("All")}
               </button>
               {filtersVisible ? (
                 <ExpandMore className='filter-less' onClick={toggleFilters} />
