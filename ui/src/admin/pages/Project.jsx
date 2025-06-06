@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './css/project.css';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Publish } from '@mui/icons-material';
 import { updateProject, getProject } from "../redux/apiCalls";
@@ -11,8 +11,7 @@ import Sidebar from '../conponents/Sidebar';
 
 const Project = () => {
     const dispatch = useDispatch();
-    const location = useLocation();
-    const projectId = location.pathname.split("/")[3];
+   const { id: projectId } = useParams();
     const [file, setFile] = useState(null);
     const [inputs, setInputs] = useState({
         title: '',
