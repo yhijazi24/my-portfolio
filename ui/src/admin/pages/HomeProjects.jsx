@@ -27,7 +27,7 @@ const HomeProject = () => {
     const { name, value } = e.target;
     setUpdatedProjects((prev) =>
       prev.map((project) =>
-        project._id === projectId ? { ...project, [name]: value } : project
+        project.id === projectId ? { ...project, [name]: value } : project
       )
     );
   };
@@ -39,7 +39,7 @@ const HomeProject = () => {
   const handleDeleteImage = (projectId, imageUrl) => {
     setUpdatedProjects((prev) =>
       prev.map((project) =>
-        project._id === projectId
+        project.id === projectId
           ? { ...project, img: project.img.filter((img) => img !== imageUrl) }
           : project
       )
@@ -50,7 +50,7 @@ const HomeProject = () => {
     e.preventDefault();
     const storage = getStorage(app);
 
-    const project = updatedProjects.find((proj) => proj._id === projectId);
+    const project = updatedProjects.find((proj) => proj.id === projectId);
     let uploadedImages = project.img || [];
 
     try {
@@ -94,7 +94,7 @@ const HomeProject = () => {
     <div className="homeProject">
       {projectData.length > 0 ? (
         updatedProjects.map((project) => (
-          <div className="homeProjectItem" key={project._id}>
+          <div className="homeProjectItem" key={project.id}>
             <span className="homeProjectTitle">{project.title}</span>
             <div className="homeProjectImageContainer">
               {project.img?.length > 0 ? (
@@ -107,7 +107,7 @@ const HomeProject = () => {
                     />
                     <button
                       className="deleteImageButton"
-                      onClick={() => handleDeleteImage(project._id, image)}
+                      onClick={() => handleDeleteImage(project.id, image)}
                     >
                       Delete
                     </button>
@@ -117,14 +117,14 @@ const HomeProject = () => {
                 <p>No images available</p>
               )}
             </div>
-            <form className="homeProjectForm" onSubmit={(e) => handleUpdate(project._id, e)}>
+            <form className="homeProjectForm" onSubmit={(e) => handleUpdate(project.id, e)}>
               <div className="homeProjectField">
                 <label>Title</label>
                 <input
                   type="text"
                   name="title"
                   value={project.title || ''}
-                  onChange={(e) => handleInputChange(project._id, e)}
+                  onChange={(e) => handleInputChange(project.id, e)}
                 />
               </div>
               <div className="homeProjectField">
@@ -133,7 +133,7 @@ const HomeProject = () => {
                   type="text"
                   name="subTitle"
                   value={project.subTitle || ''}
-                  onChange={(e) => handleInputChange(project._id, e)}
+                  onChange={(e) => handleInputChange(project.id, e)}
                 />
               </div>
               <div className="homeProjectField">
@@ -141,7 +141,7 @@ const HomeProject = () => {
                 <input
                   type="file"
                   multiple
-                  onChange={(e) => handleFileChange(project._id, e)}
+                  onChange={(e) => handleFileChange(project.id, e)}
                 />
                 <Publish className="uploadIcon" />
               </div>
