@@ -15,8 +15,11 @@ const Project = () => {
     const [file, setFile] = useState(null);
     const [inputs, setInputs] = useState({
         title: '',
+        titleFr: '',
         desc: '',
+        descFr: '',
         fullDesc: '',
+        fullDescFr: '',
         lang: '',
         webLink: '',
         githubLink: '',
@@ -155,6 +158,9 @@ const Project = () => {
                             value={inputs.title}
                             onChange={handleChange}
                         />
+                        <label>project name french</label>
+<input name="titleFr" value={inputs.titleFr} onChange={handleChange} />
+
                         <label>Project Description</label>
                         <textarea
                             type="text"
@@ -162,6 +168,9 @@ const Project = () => {
                             value={inputs.desc}
                             onChange={handleChange}
                         />
+                        <label>French Title</label>
+<input name="descFr" value={inputs.descFr} onChange={handleChange} />
+
                         <label>Full Description</label>
                         <textarea
                             type="text"
@@ -169,6 +178,9 @@ const Project = () => {
                             value={inputs.fullDesc}
                             onChange={handleChange}
                         />
+                        <label>French Title</label>
+<input name="fullDescFr" value={inputs.fullDescFr} onChange={handleChange} />
+
                         <label>Languages (comma separated)</label>
                         <input
                             type="text"

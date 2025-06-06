@@ -6,14 +6,18 @@ import { useDispatch } from "react-redux";
 import { addProject } from "../redux/apiCalls";
 import Topbar from '../conponents/Topbar';
 import Sidebar from '../conponents/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const NewProject = () => {
   const dispatch = useDispatch();
   const [files, setFiles] = useState([]);
   const [inputs, setInputs] = useState({
     title: '',
+    titleFr: '',
     desc: '',
+    descFr: '',
     fullDesc: '',
+    fullDescFr: '',
     lang: [],
     webLink: '',
     githubLink: '',
@@ -89,6 +93,9 @@ const NewProject = () => {
             value={inputs.title}
             onChange={handleChange}
           />
+          <label>French Title</label>
+<input name="titleFr" value={inputs.titleFr} onChange={handleChange} />
+
         </div>
         <div className="newProjectItem">
           <label>Description</label>
@@ -99,6 +106,9 @@ const NewProject = () => {
             onChange={handleChange}
             rows="3"
           />
+          <label>French Title</label>
+<input name="descFr" value={inputs.descFr} onChange={handleChange} />
+
         </div>
         <div className="newProjectItem">
           <label>Full Description</label>
@@ -109,6 +119,9 @@ const NewProject = () => {
             onChange={handleChange}
             rows="6"
           />
+          <label>French Title</label>
+<input name="fullDescFr" value={inputs.fullDescFr} onChange={handleChange} />
+
         </div>
         <div className="newProjectItem">
           <label>Languages</label>

@@ -3,17 +3,20 @@ import './css/projectPage.css';
 import { Close } from '@mui/icons-material';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const ProjectPage = () => {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
   const [mainImage, setMainImage] = useState('');
-  const title = location.pathname.split("/")[2];
+  const { i18n, t } = useTranslation(); // added t for translations
+
+  const titleParam = location.pathname.split("/")[2];
 
   useEffect(() => {
     const getProject = async () => {
       try {
-        const res = await axios.get(`https://portfolio-w14d.onrender.com/projects/find/${title}`);
+        const res = await axios.get(`https://portfolio-w14d.onrender.com/projects/find/${titleParam}`);
         setProject(res.data);
         if (res.data.img && res.data.img.length > 0) {
           setMainImage(res.data.img[0]);
@@ -29,15 +32,18 @@ const ProjectPage = () => {
     setMainImage(image);
   };
 
-  if (!project) {
-    return <p>Loading...</p>;
-  }
+  if (!project) return <p>Loading...</p>;
+
+  // Translated fields (safe to use here)
+  const translatedTitle = i18n.language === 'fr' ? project.titleFr : project.title;
+  const translatedDesc = i18n.language === 'fr' ? project.descFr : project.desc;
+  const translatedFullDesc = i18n.language === 'fr' ? project.fullDescFr : project.fullDesc;
 
   return (
     <div className='project-container'>
       <div className='project-wrapper'>
         <div className='project-header'>
-          <h1 className='project-title'>{project.title}</h1>
+          <h1 className='project-title'>{translatedTitle}</h1>
           <Link to={'/projects'}>
             <Close className='project-close' />
           </Link>
@@ -46,7 +52,7 @@ const ProjectPage = () => {
           <div className='pi'>
             <img src={mainImage} alt='project main' className='project-image' />
             <div className='thumbnail-container'>
-              {project.img && project.img.length > 0 ? (
+              {project.img?.length > 0 ? (
                 project.img.map((image, index) => (
                   <img
                     key={index}
@@ -62,11 +68,12 @@ const ProjectPage = () => {
             </div>
           </div>
           <div className='pp'>
-            <p className='project-info'>{project.desc}</p>
+            <p className='project-info'>{translatedDesc}</p>
           </div>
         </div>
+
         <div className='project-lang'>
-          {project.lang && project.lang.length > 0 ? (
+          {project.lang?.length > 0 ? (
             project.lang.map((lang, index) => (
               <h4 key={index} className='lang'>{lang}</h4>
             ))
@@ -74,9 +81,10 @@ const ProjectPage = () => {
             <p>No languages specified</p>
           )}
         </div>
+
         <div className='project-more-desc'>
           <p className='project-more-p'>
-            {project.fullDesc.split('-').map((line, index) => (
+            {translatedFullDesc.split('-').map((line, index) => (
               <span key={index}>
                 {index > 0 && <br />}
                 {line.trim()}

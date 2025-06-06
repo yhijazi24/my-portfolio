@@ -1,9 +1,9 @@
 import './css/projectList.css';
-import { projectData } from '../project';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const ProjectsList = () => {
   const [filtersVisible, setFiltersVisible] = useState(false);
@@ -11,14 +11,12 @@ const ProjectsList = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 9;
-  const [filters, setFilters] = useState([]); 
-  const [type, setType] = useState(null); 
-
+  const [filters, setFilters] = useState([]);
+  const { i18n, t } = useTranslation();
 
   const toggleFilters = () => {
     setFiltersVisible(!filtersVisible);
   };
-
 
   useEffect(() => {
     const getProjects = async () => {
@@ -46,10 +44,9 @@ const ProjectsList = () => {
         )
       );
     } else {
-      setFilteredProjects(projects); 
+      setFilteredProjects(projects);
     }
   }, [projects, filters]);
-  
 
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const currentProjects = filteredProjects.slice(
@@ -106,30 +103,34 @@ const ProjectsList = () => {
         <div className='project-list-body'>
           <div className='project-list-cards'>
             {currentProjects.length > 0 ? (
-              currentProjects.map((project) => (
-                <div className='project-list-card' key={project.id}>
-                 <img src={project.img[0]} alt='project image' className='project-list-image' />
+              currentProjects.map((project) => {
+                const displayTitle = i18n.language === 'fr' ? project.titleFr : project.title;
 
-                  <div className='project-list-info'>
-                    <h3 className='project-list-title'>{project.title}</h3>
-                    <div className='project-list-lang'>
-                      {project.lang.map((langItem, index) => (
-                        <span key={index}>{langItem}</span>
-                      ))}
-                    </div>
-                    <div className='button-wrapper'>
-                      <Link to={`/projects/${project.title}`}>
-                        <button className='project-list-button'> {t("more")} </button>
-                      </Link>
+                return (
+                  <div className='project-list-card' key={project.id}>
+                    <img src={project.img[0]} alt='project' className='project-list-image' />
+                    <div className='project-list-info'>
+                      <h3 className='project-list-title'>{displayTitle}</h3>
+                      <div className='project-list-lang'>
+                        {project.lang.map((langItem, index) => (
+                          <span key={index}>{langItem}</span>
+                        ))}
+                      </div>
+                      <div className='button-wrapper'>
+                        <Link to={`/projects/${project.title}`}>
+                          <button className='project-list-button'>{t("more")}</button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <p>No projects available.</p>
             )}
           </div>
         </div>
+
         <div className='pagination'>
           {[...Array(totalPages)].map((_, i) => (
             <button

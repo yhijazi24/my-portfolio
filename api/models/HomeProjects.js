@@ -6,7 +6,15 @@ const HomeProjects = sequelize.define('HomeProject', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+   titleFr: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   subTitle: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+   subTitleFr: {
     type: DataTypes.STRING,
     allowNull: false,
   },

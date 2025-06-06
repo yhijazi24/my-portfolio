@@ -2,17 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './css/homeProjects.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const HomeProjects = () => {
-  const [projectsData, setProjectsData] = useState({ title: '', subTitle: '', img: [] });
+  const [projectsData, setProjectsData] = useState(null);
   const projectRef = useRef(null);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const fetchProjectsData = async () => {
       try {
         const response = await axios.get("https://portfolio-w14d.onrender.com/homeProject/");
-        console.log("Fetched Data:", response.data);
-        setProjectsData(response.data[0]); 
+        setProjectsData(response.data[0]);
       } catch (error) {
         console.error("Error fetching projects data:", error);
       }
@@ -23,12 +24,12 @@ const HomeProjects = () => {
 
   useEffect(() => {
     const project = projectRef.current;
+    if (!project) return;
 
     const handleMouseMove = (e) => {
       const rect = project.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-
       const centerX = rect.width;
       const centerY = rect.height;
 
@@ -50,6 +51,13 @@ const HomeProjects = () => {
       project.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
+
+  if (!projectsData) {
+    return <div className='homeProjects-container'><p>Loading...</p></div>;
+  }
+
+  const title = i18n.language === 'fr' ? projectsData.titleFr : projectsData.title;
+  const subTitle = i18n.language === 'fr' ? projectsData.subTitleFr : projectsData.subTitle;
 
   return (
     <div className='homeProjects-container'>
@@ -75,9 +83,9 @@ const HomeProjects = () => {
         </div>
         <div className='homeProjects-content'>
           <Link to="/projects">
-            <h2 className='homeProjects-title'>{projectsData.title || 'Loading...'}</h2>
+            <h2 className='homeProjects-title'>{title || 'Loading...'}</h2>
           </Link>
-          <p className='homeProjects-desc'>{projectsData.subTitle || 'Loading...'}</p>
+          <p className='homeProjects-desc'>{subTitle || 'Loading...'}</p>
         </div>
       </div>
     </div>

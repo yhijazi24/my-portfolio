@@ -6,7 +6,15 @@ const HomeHeader = sequelize.define('HomeHeader', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  titleFr: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   aboutMe: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  aboutMeFr: {
     type: DataTypes.TEXT,
     allowNull: false,
   },

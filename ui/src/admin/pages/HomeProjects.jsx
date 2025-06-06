@@ -126,6 +126,9 @@ const HomeProject = () => {
                   value={project.title || ''}
                   onChange={(e) => handleInputChange(project.id, e)}
                 />
+                
+                  <label>French Title</label>
+<input name="titleFr" value={inputs.titleFr} onChange={(e) => handleInputChange(project.id, e)} />
               </div>
               <div className="homeProjectField">
                 <label>Subtitle</label>
@@ -135,6 +138,9 @@ const HomeProject = () => {
                   value={project.subTitle || ''}
                   onChange={(e) => handleInputChange(project.id, e)}
                 />
+                
+                  <label>French Title</label>
+<input name="SubTitleFr" value={inputs.subTitleFr} onChange={(e) => handleInputChange(project.id, e)} />
               </div>
               <div className="homeProjectField">
                 <label>Upload New Images</label>

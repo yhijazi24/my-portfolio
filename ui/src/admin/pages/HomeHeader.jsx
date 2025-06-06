@@ -225,6 +225,9 @@ useEffect(() => {
                     onChange={handleInputChange}
                     className="homeHeaderUpdateInput"
                   />
+                  
+                  <label>French desc</label>
+<input name="AboutMeFr" value={inputs.AboutMeFr} onChange={handleInputChange} />
                 </div>
                 <div className="homeHeaderUpdateItem">
                   <label>Title</label>
@@ -235,6 +238,9 @@ useEffect(() => {
                     onChange={handleInputChange}
                     className="homeHeaderUpdateInput"
                   />
+                  <label>French Title</label>
+<input name="titleFr" value={inputs.titleFr} onChange={handleInputChange} />
+
                 </div>
                 <div className="homeHeaderUpdateItem">
                   <label>French Resume File (PDF)</label>

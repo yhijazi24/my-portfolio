@@ -18,6 +18,11 @@ const Projects = sequelize.define('Projects', {
     allowNull: false,
     unique: true,
   },
+  titleFr: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   lang: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -33,7 +38,15 @@ const Projects = sequelize.define('Projects', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  descFr: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   fullDesc: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  fullDescFr: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
