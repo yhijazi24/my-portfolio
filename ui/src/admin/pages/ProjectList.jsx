@@ -125,7 +125,7 @@ const ProjectList = () => {
                     rows={projects}
                     disableSelectionOnClick
                     columns={columns}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row._id || row.id}
                     pageSize={8}
                     rowHeight={100}
                 />
