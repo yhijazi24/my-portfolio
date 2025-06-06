@@ -27,7 +27,7 @@ const ProjectList = () => {
     const handleDelete = async (id) => {
         try {
             await deleteProject(id);
-            setProjects(prevProjects => prevProjects.filter((project) => project._id !== id));
+            setProjects(prevProjects => prevProjects.filter((project) => project.id !== id));
         } catch (err) {
             console.error("Failed to delete project:", err);
         }
@@ -55,7 +55,7 @@ const ProjectList = () => {
     
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 220 },
+        { field: "id", headerName: "ID", width: 220 },
         {
             field: "project image",
             headerName: "Project Image",
@@ -85,7 +85,7 @@ const ProjectList = () => {
             headerName: "Action",
             width: 250,
             renderCell: (params) => {
-                const index = projects.findIndex(project => project._id === params.row._id);
+                const index = projects.findIndex(project => project.id === params.row.id);
                 return (
                     <>
                         <button
@@ -102,12 +102,12 @@ const ProjectList = () => {
                         >
                             Move Down
                         </button>
-                        <Link to={"/admin/project/" + params.row._id}>
+                        <Link to={"/admin/project/" + params.row.id}>
                             <button className="projectListEdit">Edit</button>
                         </Link>
                         <DeleteOutline
                             className="projectListDelete"
-                            onClick={() => handleDelete(params.row._id)}
+                            onClick={() => handleDelete(params.row.id)}
                         />
                     </>
                 );
@@ -121,11 +121,11 @@ const ProjectList = () => {
             <Sidebar />
             <div className="projectList">
                 <DataGrid
-                    key={projects.map(p => p._id).join(',')}
+                    key={projects.map(p => p.id).join(',')}
                     rows={projects}
                     disableSelectionOnClick
                     columns={columns}
-                    getRowId={(row) => row._id || row.id}
+                    getRowId={(row) => row.id}
                     pageSize={8}
                     rowHeight={100}
                 />
