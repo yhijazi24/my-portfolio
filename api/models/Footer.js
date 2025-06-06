@@ -16,10 +16,11 @@ const Footer = sequelize.define('Footer', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  linkdinLink: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+  linkedinLink: { 
+  type: DataTypes.STRING,
+  allowNull: false,
+},
+
 }, {
   timestamps: true,
 });

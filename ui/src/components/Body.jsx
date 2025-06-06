@@ -15,7 +15,7 @@ const Body = () => {
 useEffect(() => {
   const getHome = async () => {
     try {
-      const res = await axios.get("https://portfolio-backend-upzy.onrender.com/homeHeader/");
+      const res = await axios.get(" https://portfolio-w14d.onrender.com/homeHeader/");
       const data = Array.isArray(res.data) ? res.data[0] : null;
       if (data) {
         setHome(data);

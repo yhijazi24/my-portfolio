@@ -9,7 +9,7 @@ const Footer = () => {
   useEffect(() => {
     const getFooter = async () => {
       try {
-        const res = await axios.get(`https://portfolio-backend-upzy.onrender.com/footer/`);
+        const res = await axios.get(` https://portfolio-w14d.onrender.com/footer/`);
         console.log('Fetched Footer Data:', res.data);
         if (Array.isArray(res.data) && res.data.length > 0) {
           setFooter(res.data[0]);
@@ -44,8 +44,8 @@ const Footer = () => {
               <p className='footer-link'><span className='arrow'>&gt; </span>Resume</p>
             </a>
           )}
-          {footer.linkdinLink && (
-            <a href={footer.linkdinLink} target="_blank" rel="noopener noreferrer">
+          {footer.linkedinLink && (
+            <a href={footer.linkedinLink} target="_blank" rel="noopener noreferrer">
               <p className='footer-link'><span className='arrow'>&gt; </span>LinkedIn</p>
             </a>
           )}
