@@ -87,16 +87,16 @@ const ProjectPage = () => {
           <div className='project-buttons'>
             {project.webLink && (
               <a href={project.webLink} target='_blank' rel='noopener noreferrer'>
-                <button className='project-button'>Visit Website</button>
+                <button className='project-button'>{t("Website")}</button>
               </a>
             )}
             {project.githubLink && (
               <a href={project.githubLink} target='_blank' rel='noopener noreferrer'>
-                <button className='project-button'>Visit Github Repository</button>
+                <button className='project-button'>{t("Github")}</button>
               </a>
             )}
             <Link to={'/projects'}>
-              <button className='project-button'>View Other Projects</button>
+              <button className='project-button'>{t("otherProjects")}</button>
             </Link>
           </div>
         </div>

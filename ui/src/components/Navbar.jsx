@@ -3,16 +3,17 @@ import axios from 'axios';
 import './css/navbar.css';
 import { MenuSharp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
-
+const { i18n } = useTranslation();
   const dropDown = () => {
     if (window.innerWidth < 768) {
       setMobileMenuVisible(!isMobileMenuVisible);
     }
   };
-
+const { t } = useTranslation();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -58,14 +59,20 @@ const Navbar = () => {
         </div>
         <div className={`navbar-links ${isMobileMenuVisible ? 'visible' : 'hidden'}`} id='hamburgerMenu'>
           <a href={footer.resumeLink} target="_blank" rel="noopener noreferrer">
-            <p className='navbar-link'>Resume</p>
+            <p className='navbar-link'>{t("Resume")}</p>
           </a>
           <Link to={'/projects'}>
-            <p className='navbar-link'>Projects</p>
+            <p className='navbar-link'>{t("project")}</p>
           </Link>
           <Link to={'/contact'}>
-            <button className='navbar-button'>Contact Me</button>
+            <button className='navbar-button'>{t("contactMe")}</button>
           </Link>
+          <div className='lang-pref'>
+            
+<button onClick={() => i18n.changeLanguage('en')}>EN</button>
+<button onClick={() => i18n.changeLanguage('fr')}>FR</button>
+          </div>
+
         </div>
         <div className='hamburger-menu' onClick={dropDown}>
           <MenuSharp />

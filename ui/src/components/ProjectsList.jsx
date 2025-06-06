@@ -74,7 +74,7 @@ const ProjectsList = () => {
       <div className='project-list-wrapper'>
         <div className='project-list-header'>
           <div className='project-list-title'>
-            <h1 className='project-list-h1'>PROJECTS & CERTIFICATIONS</h1>
+            <h1 className='project-list-h1'>{t("projetCertif")}</h1>
           </div>
           <div className='project-list-filter'>
             <div className='projects-filter'>
@@ -119,7 +119,7 @@ const ProjectsList = () => {
                     </div>
                     <div className='button-wrapper'>
                       <Link to={`/projects/${project.title}`}>
-                        <button className='project-list-button'> MORE </button>
+                        <button className='project-list-button'> {t("more")} </button>
                       </Link>
                     </div>
                   </div>

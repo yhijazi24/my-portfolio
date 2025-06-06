@@ -39,12 +39,12 @@ const ContactForm = () => {
                 <div className='contact-form-wrapper'>
                     <div className='contact-form-group'>
                         <div className='contact-form-input'>
-                            <label htmlFor='first-name' className='contact-form-label'>First Name<span className="required">*</span></label>
+                            <label htmlFor='first-name' className='contact-form-label'>{t("firstName")}<span className="required">*</span></label>
                             <input type='text' id='first-name' name='firstName' placeholder='Enter your first name' required className='contact-form-vrai' value={formData.firstName}
                                 onChange={handleChange} />
                         </div>
                         <div className='contact-form-input'>
-                            <label htmlFor='last-name' className='contact-form-label'>Last Name<span className="required">*</span></label>
+                            <label htmlFor='last-name' className='contact-form-label'>{t("lastName")}<span className="required">*</span></label>
                             <input type='text' id='last-name' name='lastName' placeholder='Enter your last name' required className='contact-form-vrai' value={formData.lastName}
                                 onChange={handleChange} />
                         </div>
@@ -58,7 +58,7 @@ const ContactForm = () => {
                     </div>
                     <div className="form-group">
                         <div className='contact-form-input'>
-                            <label htmlFor="subject" className='contact-form-label'>Subject<span className="required">*</span></label>
+                            <label htmlFor="subject" className='contact-form-label'>{t("Subject")}<span className="required">*</span></label>
                             <input type="text" id="subject" name="subject" placeholder="Subject" required
                                 className='contact-form-vrai subject' value={formData.subject}
                                 onChange={handleChange} />
@@ -66,12 +66,12 @@ const ContactForm = () => {
                     </div>
                     <div className="form-group">
                         <div className='contact-form-input'>
-                            <label htmlFor="message" className='contact-form-label'>Message<span className="required">*</span></label>
+                            <label htmlFor="message" className='contact-form-label'>{t("message")}<span className="required">*</span></label>
                             <textarea id="message" name="message" required className='contact-form-vrai help' value={formData.message}
                                 onChange={handleChange} />
                         </div>
                     </div>
-                    <button type="submit" className='contact-form-button'>Submit</button>
+                    <button type="submit" className='contact-form-button'>{t("Submit")}</button>
                 </div>
             </form>
         </div>

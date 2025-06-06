@@ -29,19 +29,19 @@ const Footer = () => {
         <div className='footer-cred'>
           <p className='footer-creds'>
             2024 {footer.creator || 'ScarletWeb24'}.<br />
-            &#169; All Rights Reserved
+            &#169; {t("AllRightsReserved")}
           </p>
         </div>
         <div className='footer-links'>
           <Link to={'/'}>
-            <p className='footer-link'><span className='arrow'>&gt; </span>Home</p>
+            <p className='footer-link'><span className='arrow'>&gt; </span>{t("Home")}</p>
           </Link>
           <Link to={'/contact'}>
-            <p className='footer-link'><span className='arrow'>&gt; </span>Get in Touch</p>
+            <p className='footer-link'><span className='arrow'>&gt; </span>{t("contact")}</p>
           </Link>
           {footer.resumeLink && (
             <a href={footer.resumeLink} target="_blank" rel="noopener noreferrer">
-              <p className='footer-link'><span className='arrow'>&gt; </span>Resume</p>
+              <p className='footer-link'><span className='arrow'>&gt; </span>{t("Resume")}</p>
             </a>
           )}
           {footer.linkedinLink && (
@@ -50,7 +50,7 @@ const Footer = () => {
             </a>
           )}
           <Link to={'/projects'}>
-            <p className='footer-link'><span className='arrow'>&gt; </span>Projects</p>
+            <p className='footer-link'><span className='arrow'>&gt; </span>{t("project")}</p>
           </Link>
           {footer.githubLink && (
             <a href={footer.githubLink} target="_blank" rel="noopener noreferrer">
