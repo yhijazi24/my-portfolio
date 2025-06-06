@@ -30,8 +30,8 @@ app.use(express.json(
   
 ));
 sequelize.sync({ alter: true })
-  .then(() => console.log("✅ Database synced"))
-  .catch((err) => console.error("❌ DB sync error:", err));
+  .then(() => console.log("Database synced"))
+  .catch((err) => console.error("DB sync error:", err));
 
 
 
