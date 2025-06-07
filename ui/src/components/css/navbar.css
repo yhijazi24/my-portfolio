@@ -22,7 +22,10 @@
     transition: background-color 0.7s, border 0.5s, color 0.5s;
         margin-right: 5px;
 }
-
+.lang-pref{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 .lang-button:hover{
     color: rgb(217, 217, 217);
     background-color: rgb(65, 90, 119);
