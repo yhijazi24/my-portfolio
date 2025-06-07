@@ -9,7 +9,29 @@
     z-index: 1000;
 
 }
+.lang-button{
+    color: rgb(65, 90, 119);
+    font-size: 14px;
+    background-color: rgb(217, 217, 217);
+    cursor: pointer;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 5px 9px;
+    transition: background-color 0.7s, border 0.5s, color 0.5s;
+        margin-right: 5px;
+}
 
+.lang-button:hover{
+    color: rgb(217, 217, 217);
+    background-color: rgb(65, 90, 119);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(217, 217, 217);
+    border-image: initial;
+    transition: background-color 0.7s, border 0.5s, color 0.5s;
+}
 .navbar-links {
     display: flex;
     flex-direction: row;

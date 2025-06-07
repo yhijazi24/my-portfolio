@@ -69,8 +69,8 @@ const { t } = useTranslation();
           </Link>
           <div className='lang-pref'>
             
-<button onClick={() => i18n.changeLanguage('en')}>EN</button>
-<button onClick={() => i18n.changeLanguage('fr')}>FR</button>
+<button className='lang-button' onClick={() => i18n.changeLanguage('en')}>EN</button>
+<button className='lang-button' onClick={() => i18n.changeLanguage('fr')}>FR</button>
           </div>
 
         </div>
